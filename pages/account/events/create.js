@@ -107,6 +107,12 @@ export default function CreateEvents() {
 							<TextArea placeholer={"Описание предоставляемых опций"}></TextArea>
 						</div>
 					</section>
+					<section>
+						<h4>E-Mail для контактов</h4>
+						<div>
+							<Input placeholder={"E-Mail"} type={"mail"}></Input>
+						</div>
+					</section>
 				</section>
 				<section className={styles.mainSection}>
 					<section>
@@ -131,7 +137,7 @@ export default function CreateEvents() {
 					<section style={{maxWidth:"320px"}}>
 						<h4>Возрастная группа</h4>
 						<div style={{maxWidth:"300px", overflow:"hidden"}}>
-							<Slider defaultValue={[20, 50]} range min={14} max={60}/>
+							<Slider defaultValue={[20, 50]} range min={5} max={60}/>
 						</div>
 
 					</section>
@@ -141,7 +147,9 @@ export default function CreateEvents() {
 							<Tags></Tags>
 						</div>
 					</section>
+
 				</section>
+
 			</main>
 			<div style={{marginTop:"30px"}}>
 				<Button type={"primary"}>Создать событие</Button>
