@@ -1,6 +1,7 @@
 {
   "name": "moscowcityhack-front",
   "version": "0.1.0",
+  "prettier": "@baikinkirill/prettier-config",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@baikinkirill/prettier-config": "^1.0.4",
     "antd": "^4.21.0",
     "next": "12.1.6",
     "react": "18.1.0",

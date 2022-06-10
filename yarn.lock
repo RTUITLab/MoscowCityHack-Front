@@ -51,6 +51,11 @@
   dependencies:
     "regenerator-runtime" "^0.13.4"
 
+"@baikinkirill/prettier-config@^1.0.4":
+  "integrity" "sha512-B5bAuq6qGoc3si/6W+hxyDVuWOEstPOXpGgF4pkh74gQ9clIqaah95ntiYmgtFh51c2F3+XVDKGCe8OqII+QKw=="
+  "resolved" "https://registry.npmjs.org/@baikinkirill/prettier-config/-/prettier-config-1.0.4.tgz"
+  "version" "1.0.4"
+
 "@ctrl/tinycolor@^3.4.0":
   "integrity" "sha512-ej5oVy6lykXsvieQtqZxCOaLT+xD4+QNarq78cIYISHmZXshCvROLudpQN3lfL8G0NL7plMSSK+zlyvCaIJ4Iw=="
   "resolved" "https://registry.npmjs.org/@ctrl/tinycolor/-/tinycolor-3.4.1.tgz"
