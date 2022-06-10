@@ -74,8 +74,9 @@ export default function Events(){
 					<div>
 						<Button  type={"primary"}>Поиск</Button>
 					</div>
-					<div>
+					<div style={{display:"flex",gap:"10px"}}>
 						<Button onClick={()=>{router.push("/account/events/create")}}>Создать мероприятие</Button>
+						<Button onClick={()=>{router.push("/account/events/requests")}}>Просмотр заявок</Button>
 					</div>
 				</div>
 				<Table style={{width:"100%"}} columns={columns} dataSource={test} />

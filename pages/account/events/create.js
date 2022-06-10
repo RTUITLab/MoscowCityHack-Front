@@ -8,7 +8,7 @@ import Tags from "../../../components/Tags/Tags";
 
 const Option = Select
 
-export default function CreateEvents() {
+export default function CreateEvents({createdBy}) {
 	const [tags, setTags] = useState(
 		[
 			{title: "Фестиваль", active: false},
@@ -113,6 +113,14 @@ export default function CreateEvents() {
 							<Input placeholder={"E-Mail"} type={"mail"}></Input>
 						</div>
 					</section>
+					{createdBy==="visitor"?(
+						<section>
+							<h4>E-Mail для контактов</h4>
+							<div>
+								<Input placeholder={"E-Mail"} type={"mail"}></Input>
+							</div>
+						</section>
+					):(null)}
 				</section>
 				<section className={styles.mainSection}>
 					<section>
