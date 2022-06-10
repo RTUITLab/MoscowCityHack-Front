@@ -35,6 +35,7 @@ export default function Home() {
 								<>
 									<Input disabled={loading} placeholder={"Имя"} size={"large"}></Input>
 									<Input disabled={loading} placeholder={"Фамилия"} size={"large"}></Input>
+									<Input disabled={loading} type={"date"} placeholder={"Дата рождения"} size={"large"}></Input>
 								</>
 							) : (<>
 								<Input placeholder={"Название компании"} size={"large"}></Input>

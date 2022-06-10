@@ -11,6 +11,7 @@
     "format": "prettier --write ./pages ./components ./services ./utils ./styles"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@apollo/client": "^3.6.6",
     "@baikinkirill/prettier-config": "^1.0.4",
     "antd": "^4.21.0",
