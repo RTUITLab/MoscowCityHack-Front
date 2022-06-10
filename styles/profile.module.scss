@@ -6,7 +6,17 @@
  justify-content: center;
  .userCard {
   width: 40%;
+  .avatarBig {
+   width: 30px;
+  }
  }
  .userInfo {
+ }
+ .cardTitle {
+  border: 10px solid red;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
  }
 }
