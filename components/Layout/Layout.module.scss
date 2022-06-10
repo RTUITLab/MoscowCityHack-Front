@@ -1,0 +1,26 @@
+.parent{
+	position: relative;
+	display: block;
+	height: 100vh;
+	width: 100%;
+	overflow: hidden;
+	.content{
+		display: flex;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		position: relative;
+
+		& div:nth-child(1){
+			flex: 0 0 300px;
+		}
+		& div:nth-child(2){
+			flex: 1 1 100%;
+			overflow: auto;
+			margin: 0 auto;
+
+			display: block;
+			padding: 30px 30px;
+		}
+	}
+}
