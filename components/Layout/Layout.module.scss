@@ -11,20 +11,13 @@
 		overflow: hidden;
 		position: relative;
 
-		& div:nth-child(1){
-			flex: 0 0 300px;
 
-			& > *{
-				height: 100%;
-			}
-		}
 		& div:nth-child(2){
 			flex: 1 1 100%;
 			overflow: auto;
 			margin: 0 auto;
 
 			display: block;
-			padding: 30px 30px;
 		}
 	}
 }
