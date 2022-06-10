@@ -4,10 +4,6 @@ import {useState} from "react";
 
 const {TabPane} = Tabs;
 const {Option} = Select;
-const onChange = (key) => {
-	console.log(key);
-};
-
 
 export default function Home() {
 	const [accountType, setAccountType] = useState("person")
@@ -16,7 +12,7 @@ export default function Home() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.card}>
-				<Tabs disabled={loading} defaultActiveKey="1" onChange={onChange}>
+				<Tabs disabled={loading} defaultActiveKey="1">
 					<TabPane tab="Авторизация" key="1">
 						<div className={styles.page}>
 							<Input disabled={loading} placeholder={"Логин"} size={"large"}></Input>
