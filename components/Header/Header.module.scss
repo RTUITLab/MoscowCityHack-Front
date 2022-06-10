@@ -2,4 +2,16 @@
 	height: 50px;
 	width: 100%;
 	background-color: red;
+	display: flex;
+	align-items: center;
+	padding-left: 15px;
+	gap: 20px;
+	span{
+		font-weight: 600;
+		font-size: 17px;
+		line-height: 24px;
+		color: #FFFFFF;
+		cursor: pointer;
+
+	}
 }
