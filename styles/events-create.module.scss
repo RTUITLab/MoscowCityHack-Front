@@ -1,0 +1,73 @@
+.parent{
+	.mainContainer{
+		display: flex;
+		gap: 40px;
+		.mainSection{
+			display: grid;
+			gap:20px;
+			align-items: flex-start;
+			align-content: flex-start;
+			flex: 1 1 auto;
+			max-width: 600px;
+			h4{
+				font-weight: 600;
+				height: fit-content;
+			}
+
+			.tags{
+				display: flex;
+				gap:10px;
+				flex-wrap: wrap;
+				max-width: 500px;
+				*[active=true]{
+					color:#1890FF;
+					border-color: #1890FF;
+				}
+			}
+
+			section{
+				width: 100%;
+			}
+
+			.date{
+				display: flex;
+				gap:15px;
+
+				div{
+					padding: 0px;
+					flex: 1 1 50%;
+					height: fit-content;
+
+				}
+			}
+
+			.cover{
+				width: 300px;
+				height: 300px;
+				position: relative;
+				display: block;
+				img{
+					width: 300px;
+					height: 300px;
+					object-fit: cover;
+					position: relative;
+					z-index: 2;
+				}
+				.button{
+					position: absolute;
+					left: 0px;
+					right: 0px;
+					bottom: 25px;
+					width: fit-content;
+					z-index: 15;
+					background: transparent;
+					color:white;
+					& *:nth-child(n){
+						background: transparent;
+						color:white;
+					}
+				}
+			}
+		}
+	}
+}
