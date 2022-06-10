@@ -120,13 +120,22 @@ export default function CreateEvents() {
 					</section>
 					<section style={{maxWidth:"320px"}}>
 						<h4>Возрастная группа</h4>
-						<div style={{maxWidth:"300px"}}>
+						<div style={{maxWidth:"300px", overflow:"hidden"}}>
 							<Slider defaultValue={[20, 50]} range min={14} max={60}/>
 						</div>
-						<Tags></Tags>
+
+					</section>
+					<section>
+						<h4>Тэги</h4>
+						<div style={{maxWidth:"300px", width:"fit-content",margin:"0px"}}>
+							<Tags></Tags>
+						</div>
 					</section>
 				</section>
 			</main>
+			<div style={{marginTop:"30px"}}>
+				<Button type={"primary"}>Создать событие</Button>
+			</div>
 		</div>
 	)
 }
