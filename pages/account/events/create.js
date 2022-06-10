@@ -59,9 +59,19 @@ export default function CreateEvents() {
 					</section>
 					<section>
 						<Select placeholder={"Район Москвы"} size={"large"} style={{width: "100%"}}>
-							<Option value="jack">Jack</Option>
-							<Option value="lucy">Lucy</Option>
-							<Option value="Yiminghe">yiminghe</Option>
+							<Option value="center">Центральный</Option>
+							<Option value="north">Северный</Option>
+							<Option value="north-east">Северо-Восточный</Option>
+							<Option value="east">Восточный</Option>
+							<Option value="south-east">Юго-Восточный</Option>
+							<Option value="south">Южный</Option>
+							<Option value="south-west">Юго-Западный</Option>
+							<Option value="west">Западный</Option>
+							<Option value="north-west">Северо-Западный</Option>
+							<Option value="zelenograd">Зеленоградский</Option>
+							<Option value="trinity">Троицкий</Option>
+							<Option value="novomoskovsky">Новомосковский</Option>
+							<Option value="allcity">Вся Москва</Option>
 						</Select>
 					</section>
 
