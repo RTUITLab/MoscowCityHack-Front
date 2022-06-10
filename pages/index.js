@@ -56,3 +56,5 @@ export default function Home() {
 		</div>
 	);
 }
+
+Home.prototype.type="LoginPage"
