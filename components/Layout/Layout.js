@@ -88,7 +88,7 @@ export default function Layout({ children }) {
      </div>
     </div>
    );
-  } else if (currentHref === '/account/event/[eventId]') {
+  } else if (currentHref === '/account/events/[eventId]') {
    setActiveTab('events');
    setTitle(
     <PageHeader onBack={() => router.push('/account/events')} title="Событие" />
