@@ -65,7 +65,7 @@ export default function Events() {
    title: 'Название',
    dataIndex: 'name',
    key: 'name',
-   render: ([text, id] = arr) => <Link href={`./events/${id}`}>{text}</Link>,
+   render: (text, id) => <Link href={`./events/${id}`}>{text}</Link>,
   },
   {
    title: 'Организатор',
