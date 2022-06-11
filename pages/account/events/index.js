@@ -31,18 +31,12 @@ function ExchangeRates() {
     rate
    }
   }
- `);
- console.log(error);
- console.log(data);
- if (loading) return <p>Loading...</p>;
- if (error) return <p>Error :(</p>;
- return data.rates.map(({ currency, rate }) => (
-  <div key={currency}>
-   <p>
-    {currency}: {rate}
-   </p>
-  </div>
- ));
+`);
+	console.log(error,data,"FFF")
+	if (loading) return <p>Loading...</p>;
+	if (error) return <p>Error :(</p>;
+	return null
+
 }
 
 export default function Events() {
