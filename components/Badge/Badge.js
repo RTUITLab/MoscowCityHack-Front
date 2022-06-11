@@ -1,3 +1,4 @@
+import styles from './Badge.module.scss';
 export default function Badge(props) {
- return <div className="badge">{props.count}</div>;
+ return <div className={styles.badge}>{props.count}</div>;
 }

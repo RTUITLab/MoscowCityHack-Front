@@ -1,22 +1,57 @@
-.profile-wrapper {
+.profileWrapper {
  width: 100%;
  display: flex;
- flex-direction: row;
- align-items: center;
  justify-content: center;
+ align-items: center;
  .userCard {
-  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3%;
+
+  .cardTitle {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   align-items: center;
+   .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    flex-grow: 2;
+   }
+   .status {
+    max-width: 40%;
+    padding: 0;
+    height: 50%;
+    overflow: hidden;
+    .statusBarHeader {
+     font-size: 1.1em;
+     font-weight: 600;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    }
+    .statusBar {
+     width: 90%;
+     padding: 0;
+     margin: 0;
+    }
+   }
+  }
   .avatarBig {
-   width: 30px;
+  }
+  .bottomStats {
   }
  }
- .userInfo {
- }
- .cardTitle {
-  border: 10px solid red;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+ .statsWrapper {
+  padding: 2% 5%;
+  .tableWrapper {
+   margin-top: 5%;
+   .tableHeader {
+    font-size: 1.6em;
+   }
+  }
  }
 }
