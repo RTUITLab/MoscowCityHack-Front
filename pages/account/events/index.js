@@ -32,17 +32,10 @@ function ExchangeRates() {
    }
   }
  `);
- console.log(error);
- console.log(data);
+ console.log(error, data, 'FFF');
  if (loading) return <p>Loading...</p>;
  if (error) return <p>Error :(</p>;
- return data.rates.map(({ currency, rate }) => (
-  <div key={currency}>
-   <p>
-    {currency}: {rate}
-   </p>
-  </div>
- ));
+ return null;
 }
 
 export default function Events() {
@@ -79,7 +72,7 @@ export default function Events() {
    },
   },
   {
-   title: 'Tags',
+   title: 'Тэги',
    key: 'tags',
    dataIndex: 'tags',
    render: (_, { tags }) => (
@@ -103,7 +96,7 @@ export default function Events() {
         },
        },
        {
-        title: 'Tags',
+        title: 'Тэги',
         key: 'tags',
         dataIndex: 'tags',
         render: (_, { tags }) => (

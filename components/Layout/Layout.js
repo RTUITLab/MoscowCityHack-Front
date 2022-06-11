@@ -1,5 +1,5 @@
 import Header from '../Header/Header';
-import { Button, Menu, Popover, PageHeader } from 'antd';
+import { Button, Menu, PageHeader, Popover } from 'antd';
 import styles from './Layout.module.scss';
 import { Query } from '@apollo/client/react/components';
 import {
@@ -128,7 +128,7 @@ export default function Layout({ children }) {
       <div style={{ height: '20px' }}></div>
       <Menu.Item
        onClick={() => {
-        router.push('/account/profile');
+        router.push('/account/');
        }}
        key={'profile'}
        icon={<UserOutlined />}>
