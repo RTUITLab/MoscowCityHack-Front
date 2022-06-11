@@ -92,8 +92,6 @@ const Profile = () => {
 				}
 				actions={[
 					<SettingOutlined key="setting"/>,
-					<EditOutlined key="edit"/>,
-					<EllipsisOutlined key="ellipsis"/>,
 				]}>
 				<div className={styles.bottomStats}>
 					<Descriptions

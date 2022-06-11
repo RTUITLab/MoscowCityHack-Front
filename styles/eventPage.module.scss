@@ -35,12 +35,12 @@
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
+    gap:10px;
     .direction {
      display: flex;
      justify-content: center;
      align-items: center;
      padding: 20px;
-     margin: 10px 20px 10px 0;
     }
    }
    .tags {

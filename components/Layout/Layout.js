@@ -1,6 +1,7 @@
 import Header from '../Header/Header';
 import {Button, Menu, Popover} from 'antd';
 import styles from './Layout.module.scss';
+import {Query} from "@apollo/client/react/components";
 import {
 	HeartFilled,
 	HeartOutlined,
@@ -10,14 +11,32 @@ import {
 	UserOutlined,
 } from '@ant-design/icons';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import {useEffect, useState} from 'react';
+import {useRouter} from 'next/router';
 import Badge from '../Badge/Badge';
 
-export default function Layout({ children }) {
- const router = useRouter();
- const [activeTab, setActiveTab] = useState('profile');
- const [title, setTitle] = useState('Профиль');
+export default function Layout({children}) {
+	const router = useRouter();
+	const [activeTab, setActiveTab] = useState('profile');
+	const [title, setTitle] = useState('Профиль');
+
+
+	const getUsers = () => {
+		<Query query={gql(`
+		 {
+  authorize(login: "mod55", password: "mod55") {
+    role,
+    token
+  }
+}
+
+		 `)}>
+			{(loading, error, data) => {
+				console.log(data)
+			}
+			}
+		</Query>
+	}
 
 	useEffect(() => {
 		let currentHref = router.pathname;
@@ -64,8 +83,8 @@ export default function Layout({ children }) {
 								<div style={{display: "grid", gap: "15px"}}>
 									<CartRow></CartRow>
 									<CartRow></CartRow>
-									<div style={{display:"flex", justifyContent:"flex-end"}}>
-										<Button style={{width:"fit-content"}} type={"primary"}>Оформить заказ</Button>
+									<div style={{display: "flex", justifyContent: "flex-end"}}>
+										<Button style={{width: "fit-content"}} type={"primary"}>Оформить заказ</Button>
 									</div>
 								</div>
 							)
@@ -92,7 +111,9 @@ export default function Layout({ children }) {
 			<div className={styles.content}>
 				<div style={{flex: '0 0 250px'}}>
 					<Menu style={{height: '100%'}} selectedKeys={[activeTab]}>
+						<div style={{height:"20px"}}></div>
 						<Menu.Item
+
 							onClick={() => {
 								router.push('/account/profile');
 							}}
@@ -125,10 +146,10 @@ export default function Layout({ children }) {
 					margin: "0 auto",
 					paddingBottom: '100px',
 					display: "block",
-					backgroundColor:"#f9f9f9"
+					backgroundColor: "#f9f9f9"
 				}}>
 					<h2>{title}</h2>
-					<div style={{height:"50px"}}></div>
+					<div style={{height: "50px"}}></div>
 					<div>{children}</div>
 				</div>
 			</div>
