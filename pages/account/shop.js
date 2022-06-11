@@ -1,6 +1,10 @@
 import styles from '../../styles/shop.module.scss';
 import { Card, Row, Col } from 'antd';
-import { HeartOutlined } from '@ant-design/icons';
+import {
+ HeartOutlined,
+ DislikeOutlined,
+ ShoppingCartOutlined,
+} from '@ant-design/icons';
 import Image from 'next/image';
 const { Meta } = Card;
 import React from 'react';
@@ -16,12 +20,13 @@ function ShopCard(props) {
       layout="responsive"
       width="100"
       height="50"
+      objectFit="cover"
      />
     }
     actions={[
-     <HeartOutlined key="add" />,
-     <HeartOutlined key="add" />,
-     <HeartOutlined key="add" />,
+     <HeartOutlined key="like" className={styles.action} />,
+     <DislikeOutlined key="dislike" className={styles.action} />,
+     <ShoppingCartOutlined key="add" className={styles.action} />,
     ]}>
     <Meta title={props.title} description={props.description} />
    </Card>
@@ -51,7 +56,7 @@ export default function Shop() {
    },
    {
     imgSrc: imgSrc,
-    title: 'Рюкзак',
+    title: 'Самолет',
     description: 'Самый прочный, надежный и большой',
    },
   ],
@@ -78,7 +83,7 @@ export default function Shop() {
    {rows.map((row, i) => (
     <Row key={i} style={{ marginTop: 50 }}>
      {row.map((el, i) => (
-      <Col span={6} key={i}>
+      <Col flex={1} key={i}>
        <ShopCard
         imgSrc={el.imgSrc}
         title={el.title}
