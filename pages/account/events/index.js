@@ -1,6 +1,7 @@
 import {Button, Input, Space, Table, Tag} from "antd";
 import {useRouter} from "next/router";
 import styles from '../../../styles/events.module.scss'
+import React from 'react'
 
 export default function Events(){
 	const router = useRouter()
@@ -46,9 +47,11 @@ export default function Events(){
 						}
 
 						return (
-							<Tag color={color} key={tag}>
-								{tag.toUpperCase()}
-							</Tag>
+							<React.Fragment key={tag+Math.random()*99}>
+								<Tag color={color} >
+									{tag.toUpperCase()}
+								</Tag>
+							</React.Fragment>
 						);
 					})}
 				</>

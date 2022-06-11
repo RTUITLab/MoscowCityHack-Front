@@ -1,5 +1,5 @@
 import {EditOutlined, EllipsisOutlined, SettingOutlined,} from '@ant-design/icons';
-import Image from 'next/image';
+import { Image } from 'antd';
 import {Button, Card, Col, Descriptions, Progress, Row, Statistic, Table,} from 'antd';
 import React from 'react';
 import Badge from '../../components/Badge/Badge';
@@ -18,10 +18,6 @@ const CardTitle = () => {
 			</div>
 		</div>
 	);
-};
-
-const myLoader = ({src, width, quality}) => {
-	return `https://images.unsplash.com/${src}`;
 };
 
 const Profile = () => {
@@ -91,13 +87,9 @@ const Profile = () => {
 					<>
 						<CardTitle/>
 						<Image
-							loader={myLoader}
-							layout="responsive"
-							width="100"
-							height="100"
-							className={styles.avatarBig}
+
 							alt="Ваше фото"
-							src="photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+							src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
 						/>
 					</>
 				}

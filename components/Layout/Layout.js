@@ -92,10 +92,10 @@ export default function Layout({children}) {
 				</div>
 				<div style={{
 					padding: '30px',
-					marginBottom: '50px',
 					flex: "1 1 100%",
-					overflow: "hidden",
+					overflow: "auto",
 					margin: "0 auto",
+					marginBottom: '100px',
 					display: "block"
 				}}>
 					<h2>{title}</h2>
