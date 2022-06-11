@@ -1,7 +1,12 @@
 import styles from '../../../styles/eventPage.module.scss';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Button, Image, Progress, Divider } from 'antd';
+import { Button, Image, Progress, Divider, Tag } from 'antd';
+import {
+ HomeOutlined,
+ FieldTimeOutlined,
+ InfoCircleOutlined,
+} from '@ant-design/icons';
 
 export default function EventPage() {
  const router = useRouter();
@@ -57,12 +62,16 @@ export default function EventPage() {
  return (
   <>
    {project === 'empty' ? (
-    <></>
+    <div style={{ position: 'absolute', top: '30%', left: '50%' }}>
+     <h1>Событие не найдено</h1>
+    </div>
    ) : (
     <div className={styles.eventWrapper}>
      <header className={styles.projectHead}>
       <h2>{project.title}</h2>
-      <Button size="large">Участники</Button>
+      {
+       //</header>Button size="large">Участники</Button>
+      }
      </header>
      <section className={styles.projectTop}>
       <Image src={project.imgSrc} width={700} />
@@ -76,17 +85,21 @@ export default function EventPage() {
         ))}
        </div>
        <Divider />
-       <span className={styles.texts}>{project.companyName}</span>
-       <span className={styles.texts}>{project.address}</span>
-       <span className={styles.texts}>{new Date(project.date).toString()}</span>
-
-       <div
-        style={{
-         display: 'flex',
-         justifyContent: 'space-between',
-         alignItems: 'center',
-         width: '100%',
-        }}>
+       <div className={styles.texts}>
+        <div className={styles.text}>
+         <InfoCircleOutlined />
+         {project.companyName}
+        </div>
+        <div className={styles.text}>
+         <HomeOutlined />
+         {project.address}
+        </div>
+        <div className={styles.text}>
+         <FieldTimeOutlined />
+         {new Date(project.date).toString()}
+        </div>
+       </div>
+       <div className={styles.places}>
         <span>Осталось мест</span>
         <span>{project.capacity[0] + '/' + project.capacity[1]}</span>
        </div>
@@ -99,9 +112,9 @@ export default function EventPage() {
 
        <div className={styles.tags}>
         {project.tags.map((tag, i) => (
-         <Button key={i} className={styles.tag}>
+         <Tag key={i} className={styles.tag}>
           {tag}
-         </Button>
+         </Tag>
         ))}
        </div>
       </div>
