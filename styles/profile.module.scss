@@ -2,16 +2,16 @@
  width: 100%;
  display: flex;
  justify-content: center;
- align-items: center;
+ min-width: 900px;
  .userCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 3%;
+  padding: 15px;
+  max-width: 400px;
 
   .cardTitle {
-   display: flex;
-   flex-direction: row;
+   display: grid;
    justify-content: space-around;
    align-items: center;
    .name {
@@ -22,16 +22,20 @@
     flex-grow: 2;
    }
    .status {
-    max-width: 40%;
     padding: 0;
-    height: 50%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 15px;
     .statusBarHeader {
-     font-size: 1.1em;
+     font-size: 13px;
      font-weight: 600;
-     display: flex;
-     justify-content: center;
-     align-items: center;
+     width: 100%;
+     white-space: nowrap;
+     text-align: center;
+
     }
     .statusBar {
      width: 90%;
