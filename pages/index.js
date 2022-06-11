@@ -1,57 +1,54 @@
-import styles from '../styles/LoginPage.module.scss';
-import {Button, Divider, Input, Select, Tabs} from 'antd';
-import {useState} from "react";
+import Header from '../components/Header/Header';
+import st from '../styles/index.module.scss';
+import { Button } from 'antd';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-const {TabPane} = Tabs;
-const {Option} = Select;
+export default function IndexPage() {
+ const router = useRouter();
 
-export default function Home() {
-	const [accountType, setAccountType] = useState("person")
-	const [loading, setLoading] = useState(false)
-
-	return (
-		<div className={styles.container}>
-			<div className={styles.card}>
-				<Tabs disabled={loading} defaultActiveKey="1">
-					<TabPane tab="Авторизация" key="1">
-						<div className={styles.page}>
-							<Input disabled={loading} placeholder={"Логин"} size={"large"}></Input>
-							<Input disabled={loading} placeholder={"Пароль"} type={"password"} size={"large"}></Input>
-							<Divider/>
-							<Button loading={loading} onClick={() => {
-								setLoading(true)
-							}} type={"primary"}>Войти</Button>
-						</div>
-					</TabPane>
-					<TabPane tab="Регистрация" key="2">
-						<div className={styles.page}>
-							<Select disabled={loading} size={"large"} defaultValue="person" onChange={(e) => {
-								setAccountType(e)
-							}}>
-								<Option value="person">Физическое лицо</Option>
-								<Option value="company">Юридическое лицо</Option>
-							</Select>
-							{accountType === "person" ? (
-								<>
-									<Input disabled={loading} placeholder={"Имя"} size={"large"}></Input>
-									<Input disabled={loading} placeholder={"Фамилия"} size={"large"}></Input>
-									<Input disabled={loading} type={"date"} placeholder={"Дата рождения"} size={"large"}></Input>
-								</>
-							) : (<>
-								<Input placeholder={"Название компании"} size={"large"}></Input>
-							</>)}
-							<Input disabled={loading} placeholder={"Логин"} size={"large"}></Input>
-							<Input disabled={loading} placeholder={"Пароль"} type={"password"} size={"large"}></Input>
-							<Divider/>
-							<Button loading={loading} onClick={() => {
-								setLoading(true)
-							}} type={"primary"}>Зарегистрироваться</Button>
-						</div>
-					</TabPane>
-				</Tabs>
-			</div>
-		</div>
-	);
+ return (
+  <div className={st.parentContainer}>
+   <div style={{ position: 'fixed', top: '0px', width: '100%' }}>
+    <Header disableButtons={true} />
+   </div>
+   <div
+    style={{
+     width: '100%',
+     display: 'flex',
+     justifyContent: 'center',
+     alignItems: 'center',
+     height: 'calc(100vh - 100px)',
+    }}>
+    <div className={st.contentContainer}>
+     <div className={st.textContainer}>
+      <div>
+       <h1>Помогать — легко.</h1>
+       <h1>Стоит только начать.</h1>
+      </div>
+      <div style={{ marginTop: '50px' }}>
+       <Button
+        onClick={() => {
+         router.push('/login');
+        }}
+        type={'primary'}
+        size={'large'}>
+        Создать аккаунт
+       </Button>
+       <br />
+       <br />
+       <Link href={'/form/create'} type={'primary'} size={'large'}>
+        Оставить заявку на помощь
+       </Link>
+      </div>
+     </div>
+     <div className={st.imageContainer}>
+      <img src="/images/firstIcon.svg" alt="" />
+     </div>
+    </div>
+   </div>
+  </div>
+ );
 }
 
-Home.prototype.type="LoginPage"
+IndexPage.prototype.type = 'indexPage';

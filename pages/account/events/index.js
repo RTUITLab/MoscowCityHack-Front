@@ -31,12 +31,11 @@ function ExchangeRates() {
     rate
    }
   }
-`);
-	console.log(error,data,"FFF")
-	if (loading) return <p>Loading...</p>;
-	if (error) return <p>Error :(</p>;
-	return null
-
+ `);
+ console.log(error, data, 'FFF');
+ if (loading) return <p>Loading...</p>;
+ if (error) return <p>Error :(</p>;
+ return null;
 }
 
 export default function Events() {
@@ -73,7 +72,7 @@ export default function Events() {
    },
   },
   {
-   title: 'Tags',
+   title: 'Тэги',
    key: 'tags',
    dataIndex: 'tags',
    render: (_, { tags }) => (
@@ -97,7 +96,7 @@ export default function Events() {
         },
        },
        {
-        title: 'Tags',
+        title: 'Тэги',
         key: 'tags',
         dataIndex: 'tags',
         render: (_, { tags }) => (

@@ -1,17 +1,13 @@
 import styles from '../../styles/shop.module.scss';
-import { Card, Row, Col } from 'antd';
-import {
- HeartOutlined,
- DislikeOutlined,
- ShoppingCartOutlined,
-} from '@ant-design/icons';
-import {Image} from 'antd';
-const { Meta } = Card;
+import { Card, Image } from 'antd';
+import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import React from 'react';
+
+const { Meta } = Card;
 
 function ShopCard(props) {
  return (
-  <div className={styles.cardWrapper} >
+  <div className={styles.cardWrapper}>
    <Card
     cover={
      <Image
@@ -26,7 +22,7 @@ function ShopCard(props) {
      <HeartOutlined key="like" className={styles.action} />,
      <ShoppingCartOutlined key="add" className={styles.action} />,
     ]}>
-    <Meta title={props.title} description={props.description} />
+    <Meta title={props.title} description={props.cost.toString()} />
    </Card>
   </div>
  );
@@ -39,39 +35,33 @@ export default function Shop() {
   {
    imgSrc: imgSrc,
    title: 'Футболка',
-   description: 'Хлопок 100%',
+   cost: 9599,
   },
   {
    imgSrc: imgSrc,
    title: 'Кепка',
-   description: 'красная кепка лакшери',
+   cost: 9599,
   },
   {
    imgSrc: imgSrc,
    title: 'Рюкзак',
-   description: 'Самый прочный, надежный и большойfffffffffffffffffff ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+   cost: 9599,
   },
   {
    imgSrc: imgSrc,
    title: 'Самолет',
-   description: 'Самый прочный, надежный и большой',
+   cost: 9599,
   },
   {
    imgSrc: imgSrc,
    title: 'Самолет',
-   description: 'Самый прочный, надежный и большой',
+   cost: 9599,
   },
-
  ];
  return (
   <div className={styles.shopWrapper}>
    {rows.map((el, i) => (
-      <ShopCard
-        key={i}
-        imgSrc={el.imgSrc}
-        title={el.title}
-        description={el.description}
-      />
+    <ShopCard key={i} imgSrc={el.imgSrc} title={el.title} cost={el.cost} />
    ))}
   </div>
  );
