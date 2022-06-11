@@ -33,7 +33,7 @@ export default function Layout({children}) {
 				<Header/>
 			</div>
 			<div className={styles.content}>
-				<div style={{flex:"0 0 300px"}}>
+				<div style={{flex:"0 0 250px"}}>
 					<Menu
 						style={{height:"100%"}}
 						selectedKeys={[activeTab]}

@@ -1,5 +1,4 @@
 import '../styles/globals.css';
-import 'antd/dist/antd.css';
 import Layout from "../components/Layout/Layout";
 import MainContext from "../contexts/MainContext";
 import {useState} from "react";
