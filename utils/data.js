@@ -1,0 +1,31 @@
+export const district=[
+	{name:"center", title:"Центральный"},
+	{name:"north", title:"Северный"},
+	{name:"north-east", title:"Северо-Восточный"},
+	{name:"east", title:"Восточный"},
+	{name:"south-east", title:"Юго-Восточный"},
+	{name:"south", title:"Южный"},
+	{name:"south-west", title:"Юго-Западный"},
+	{name:"west", title:"Западный"},
+	{name:"north-west", title:"Северо-Западный"},
+	{name:"zelenograd", title:"Зеленоградский"},
+	{name:"trinity", title:"Троицкий"},
+	{name:"novomoskovsky", title:"Новомосковский"},
+	{name:"allcity", title:"Вся Москва"},
+]
+
+export const tags=[
+	{title: "Фестиваль", active: false,name:"festival"},
+	{title: "НКО", active: false,name:"nko"},
+	{title: "Культура", active: false,name:"culture"},
+	{title: "Экология", active: false,name:"ecology"},
+	{title: "Общество", active: false,name:"society"},
+	{title: "Мастер-класс", active: false,name:"lesson"},
+	{title: "Выставка", active: false,name:"exhibition"},
+	{title: "Конкурс", active: false,name:"contest"},
+	{title: "Ярмарка", active: false,name:"fair"},
+	{title: "Спорт", active: false,name:"sport"},
+	{title: "Дети и молодежь", active: false,name:"children"},
+	{title: "Донорство", active: false,name:"donation"},
+	{title: "Животные", active: false,name:"animals"},
+]

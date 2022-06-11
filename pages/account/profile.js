@@ -11,11 +11,7 @@ const CardTitle = () => {
 	return (
 		<div className={styles.cardTitle}>
 			<h3 className={styles.name}>Костик Иванов</h3>
-			<div className={styles.status}>
-				<Progress percent={70} className={styles.statusBar} showInfo={false}/>
-				<div className={styles.statusBarHeader}>200 до след. уровня</div>
-				{/*<Badge count={2} />*/}
-			</div>
+
 		</div>
 	);
 };
@@ -81,6 +77,7 @@ const Profile = () => {
 	return (
 		<div className={styles.profileWrapper}>
 
+		<div>
 			<Card
 				className={styles.userCard}
 				cover={
@@ -109,18 +106,22 @@ const Profile = () => {
 							justifyContent: 'flex-end',
 							fontSize: '1.4em',
 						}}>
-						<Descriptions.Item label="Количество мероприятий">
-							<span>{4}</span>
-						</Descriptions.Item>
-						<Descriptions.Item label="Часов работы">
-							<span>{12}</span>
-						</Descriptions.Item>
-						<Descriptions.Item label="Количество мероприятий">
-							<span>{4}</span>
-						</Descriptions.Item>
+
+						<div style={{display:"flex",justifyContent:"center"}}>
+							<div style={{display:"grid", gap:"15px", justifyContent:"center"}}>
+								<div>
+									<Badge type={"level"} count={5}></Badge>
+								</div>
+								<div className={styles.status}>
+									<Progress percent={70} className={styles.statusBar} showInfo={false}/>
+									<div style={{fontSize:"14px", color:"gray"}}>200 до след. уровня</div>
+								</div>
+							</div>
+						</div>
 					</Descriptions>
 				</div>
 			</Card>
+		</div>
 
 			<div className={styles.statsWrapper}>
 				<div style={{display:"flex", justifyContent:"flex-start", gap:"30px"}}>
@@ -152,7 +153,7 @@ const Profile = () => {
 					align="middle"
 					style={{marginTop: '5%'}}
 					className={styles.tableWrapper}>
-					<div style={{display: "flex", width: "100%", justifyContent: "space-between"}}>
+					<div style={{display: "flex", width: "100%", justifyContent: "space-between", alignItems:"center",gap:"15px"}}>
 						<div style={{width: "100%"}}>
 							<h3 className={styles.tableHeader}>Последние добрые дела</h3>
 						</div>
