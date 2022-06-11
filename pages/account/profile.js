@@ -146,12 +146,9 @@ const Profile = () => {
 
     <Col span={14} className={styles.statsWrapper}>
      <Row justify="start" align="top" wrap={false}>
-      <Col span={4}>
-       <Statistic
-        title={<span style={{ fontSize: 1.4 + 'em' }}>Баллы добра</span>}
-        value={11283}
-        valueStyle={{ fontSize: 2 + 'em' }}
-       />
+      <Col span={4} style={{ fontSize: 1.4 + 'em' }}>
+       <span>Баллы добра</span>
+       <Badge count={11283} />
       </Col>
       <Col span={4}>
        <Statistic
