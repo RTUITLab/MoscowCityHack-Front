@@ -1,6 +1,5 @@
 .profileWrapper {
  width: 100%;
- border: 1px solid red;
  display: flex;
  justify-content: center;
  align-items: center;
@@ -8,13 +7,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid blue;
+  padding: 3%;
+
   .cardTitle {
    display: flex;
    flex-direction: row;
    justify-content: space-around;
    align-items: center;
-   max-height: 20%;
    .name {
     display: flex;
     justify-content: center;
@@ -23,13 +22,16 @@
     flex-grow: 2;
    }
    .status {
-    max-width: 50%;
+    max-width: 40%;
     padding: 0;
     height: 50%;
     overflow: hidden;
     .statusBarHeader {
      font-size: 1.1em;
      font-weight: 600;
+     display: flex;
+     justify-content: center;
+     align-items: center;
     }
     .statusBar {
      width: 90%;
@@ -39,12 +41,17 @@
    }
   }
   .avatarBig {
-   border: 15px solid green;
   }
   .bottomStats {
   }
  }
  .statsWrapper {
-  border: 1px solid green;
+  padding: 2% 5%;
+  .tableWrapper {
+   margin-top: 5%;
+   .tableHeader {
+    font-size: 1.6em;
+   }
+  }
  }
 }

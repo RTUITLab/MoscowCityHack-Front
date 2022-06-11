@@ -64,6 +64,7 @@ const Profile = () => {
    title: 'Баллы',
    dataIndex: 'points',
    key: 'Баллы',
+   render: (points) => <Badge count={points} />,
   },
  ];
 
@@ -96,7 +97,7 @@ const Profile = () => {
  return (
   <div className={styles.profileWrapper}>
    <Row justify="space-around">
-    <Col span={12}>
+    <Col span={6}>
      <Card
       className={styles.userCard}
       cover={
@@ -105,8 +106,8 @@ const Profile = () => {
         <Image
          loader={myLoader}
          layout="responsive"
-         width="300"
-         height="300"
+         width="100"
+         height="100"
          className={styles.avatarBig}
          alt="Ваше фото"
          src="photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
@@ -142,41 +143,62 @@ const Profile = () => {
       </div>
      </Card>
     </Col>
-    <Col span={12} className={styles.statsWrapper}>
-     <Row justify="space-around" align="top" wrap={false}>
-      <Col span={8}>
+
+    <Col span={14} className={styles.statsWrapper}>
+     <Row justify="start" align="top" wrap={false}>
+      <Col span={4}>
        <Statistic
-        title="Баллы добра"
+        title={<span style={{ fontSize: 1.4 + 'em' }}>Баллы добра</span>}
         value={11283}
-        valueStyle={{ padding: 0, textAlign: 'center' }}
+        valueStyle={{ fontSize: 2 + 'em' }}
        />
       </Col>
-      <Col span={8}>
+      <Col span={4}>
        <Statistic
-        title="Часов работы"
+        title={<span style={{ fontSize: 1.4 + 'em' }}>Часов работы</span>}
         value={25}
-        valueStyle={{ padding: 0, textAlign: 'center' }}
+        valueStyle={{ fontSize: 2 + 'em' }}
        />
       </Col>
-      <Col span={8}>
+      <Col span={4}>
        <Statistic
-        title="Мероприятия"
+        title={<span style={{ fontSize: 1.4 + 'em' }}>Мероприятия</span>}
         value={5}
-        valueStyle={{ padding: 0, textAlign: 'center' }}
+        valueStyle={{ fontSize: 2 + 'em' }}
        />
       </Col>
+      <Col span={12} />
      </Row>
-     <Row>
+     <Row
+      justify="center"
+      align="middle"
+      style={{ marginTop: '5%' }}
+      className={styles.tableWrapper}>
       <Row>
-       <Col span={14}>Последние добрые дела</Col>
+       <Col span={14}>
+        <h3 className={styles.tableHeader}>Последние добрые дела</h3>
+       </Col>
        <Col span={10}>
-        <Button type="primary">Выгрузить в PDF</Button>
-        <Button type="primary">Достижения</Button>
+        <Row justify="center" align="middle">
+         <Col span={12}>
+          <Button type="primary">Выгрузить в PDF</Button>
+         </Col>
+         <Col span={12}>
+          <Button type="primary">Достижения</Button>
+         </Col>
+        </Row>
        </Col>
       </Row>
-      <Table columns={columns} dataSource={data} />
+      <Row>
+       <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ['bottomLeft'] }}
+       />
+      </Row>
      </Row>
     </Col>
+    <Col span={4} />
    </Row>
   </div>
  );
