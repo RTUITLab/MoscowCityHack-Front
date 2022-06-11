@@ -49,7 +49,7 @@ export default function Shop() {
   {
    imgSrc: imgSrc,
    title: 'Рюкзак',
-   description: 'Самый прочный, надежный и большой',
+   description: 'Самый прочный, надежный и большойfffffffffffffffffff ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
   },
   {
    imgSrc: imgSrc,

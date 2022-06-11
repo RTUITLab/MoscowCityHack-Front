@@ -1,6 +1,7 @@
 import Header from '../Header/Header';
 import { Button, Menu, Popover, PageHeader } from 'antd';
 import styles from './Layout.module.scss';
+import { Query } from '@apollo/client/react/components';
 import {
  HeartFilled,
  HeartOutlined,
@@ -18,6 +19,24 @@ export default function Layout({ children }) {
  const router = useRouter();
  const [activeTab, setActiveTab] = useState('profile');
  const [title, setTitle] = useState('Профиль');
+
+ const getUsers = () => {
+  <Query
+   query={gql(`
+		 {
+  authorize(login: "mod55", password: "mod55") {
+    role,
+    token
+>>>>>>> 63af4e13853112f0c8b933395587f99e7739902c
+  }
+}
+
+		 `)}>
+   {(loading, error, data) => {
+    console.log(data);
+   }}
+  </Query>;
+ };
 
  useEffect(() => {
   let currentHref = router.pathname;
@@ -106,6 +125,7 @@ export default function Layout({ children }) {
    <div className={styles.content}>
     <div style={{ flex: '0 0 250px' }}>
      <Menu style={{ height: '100%' }} selectedKeys={[activeTab]}>
+      <div style={{ height: '20px' }}></div>
       <Menu.Item
        onClick={() => {
         router.push('/account/profile');
