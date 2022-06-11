@@ -1,0 +1,36 @@
+.parentContainer {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 30px;
+
+	.contentContainer {
+		.header {
+			.table {
+				display: grid;
+				grid-template-columns: auto auto;
+				gap: 5px 10px;
+				justify-content: flex-start;
+				align-items: flex-start;
+
+				h3 {
+					margin: 0;
+					padding: 0;
+				}
+
+				p {
+					margin: 0;
+					padding: 0;
+				}
+			}
+		}
+
+		.footer {
+			display: flex;
+			justify-content: flex-end;
+			
+		}
+	}
+
+}

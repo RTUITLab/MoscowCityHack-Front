@@ -1,7 +1,6 @@
 import Header from '../Header/Header';
-import { Button, Menu, PageHeader, Popover } from 'antd';
+import { Button, Menu, Modal, PageHeader, Popover } from 'antd';
 import styles from './Layout.module.scss';
-import { Query } from '@apollo/client/react/components';
 import {
  HeartFilled,
  HeartOutlined,
@@ -11,37 +10,21 @@ import {
  UserOutlined,
 } from '@ant-design/icons';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Badge from '../Badge/Badge';
+import MainContext from '../../contexts/MainContext';
 
 export default function Layout({ children }) {
  const router = useRouter();
  const [activeTab, setActiveTab] = useState('profile');
  const [title, setTitle] = useState('Профиль');
-
- const getUsers = () => {
-  <Query
-   query={gql(`
-		 {
-  authorize(login: "mod55", password: "mod55") {
-    role,
-    token
->>>>>>> 63af4e13853112f0c8b933395587f99e7739902c
-  }
-}
-
-		 `)}>
-   {(loading, error, data) => {
-    console.log(data);
-   }}
-  </Query>;
- };
+ const [state, setState] = useContext(MainContext);
 
  useEffect(() => {
   let currentHref = router.pathname;
   console.log(currentHref);
-  if (currentHref === '/account/profile') {
+  if (currentHref === '/account') {
    setActiveTab('profile');
    setTitle('Профиль');
   } else if (currentHref === '/account/events') {
@@ -90,7 +73,12 @@ export default function Layout({ children }) {
           <CartRow></CartRow>
           <CartRow></CartRow>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-           <Button style={{ width: 'fit-content' }} type={'primary'}>
+           <Button
+            style={{ width: 'fit-content' }}
+            type={'primary'}
+            onClick={() => {
+             setState({ showCart: true });
+            }}>
             Оформить заказ
            </Button>
           </div>
@@ -128,7 +116,7 @@ export default function Layout({ children }) {
       <div style={{ height: '20px' }}></div>
       <Menu.Item
        onClick={() => {
-        router.push('/account/');
+        router.push('/account');
        }}
        key={'profile'}
        icon={<UserOutlined />}>
@@ -166,6 +154,19 @@ export default function Layout({ children }) {
      <div style={{ height: '50px' }}></div>
      <div>{children}</div>
     </div>
+    <Modal
+     title="Basic Modal"
+     visible={state?.showCart || false}
+     onOk={() => {
+      setState({ showCart: false });
+     }}
+     onCancel={() => {
+      setState({ showCart: false });
+     }}>
+     <p>Some contents...</p>
+     <p>Some contents...</p>
+     <p>Some contents...</p>
+    </Modal>
    </div>
   </div>
  );

@@ -10,12 +10,13 @@ import {
 } from 'antd';
 import { useRouter } from 'next/router';
 import styles from '../../../styles/events.module.scss';
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { district, tags } from '../../../utils/data';
 import Link from 'next/link';
 import { gql, useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
+import Map from '../../../components/map';
 
 const { Option } = Select;
 
@@ -40,6 +41,7 @@ function ExchangeRates() {
 
 export default function Events() {
  const router = useRouter();
+ const [viewMap, setMapVisible] = useState(false);
 
  const test = [
   {
@@ -47,12 +49,14 @@ export default function Events() {
    date: new Date().getTime(),
    tags: ['fdfdf', 'fdfdsf', 'fdfdf'],
    district: 'Юго-Запад',
+   org: 'Юго-Запад',
   },
   {
    name: 'Имя аааа',
    date: new Date().getTime(),
    tags: ['fdfdf', 'fdfdsf', 'fdfdf'],
    district: 'Юго-Запад',
+   org: 'Юго-Запад',
   },
  ];
 
@@ -62,6 +66,12 @@ export default function Events() {
    dataIndex: 'name',
    key: 'name',
    render: ([text, id] = arr) => <Link href={`./events/${id}`}>{text}</Link>,
+  },
+  {
+   title: 'Организатор',
+   dataIndex: 'org',
+   key: 'name',
+   render: (text) => <div>{text}</div>,
   },
   {
    title: 'Дата',
@@ -80,46 +90,6 @@ export default function Events() {
      {tags.map((tag) => {
       let color = tag.length > 5 ? 'geekblue' : 'green';
 
-      const columns = [
-       {
-        title: 'Название',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text) => <a>{text}</a>,
-       },
-       {
-        title: 'Дата',
-        dataIndex: 'date',
-        key: 'age',
-        render: (e) => {
-         return new Date(e).toLocaleDateString('ru');
-        },
-       },
-       {
-        title: 'Тэги',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: (_, { tags }) => (
-         <>
-          {tags.map((tag) => {
-           let color = tag.length > 5 ? 'geekblue' : 'green';
-
-           return (
-            <React.Fragment key={tag + Math.random() * 99}>
-             <Tag color={color}>{tag.toUpperCase()}</Tag>
-            </React.Fragment>
-           );
-          })}
-         </>
-        ),
-       },
-       {
-        title: 'Район',
-        dataIndex: 'rayon',
-        key: 'address',
-       },
-      ];
-
       return (
        <React.Fragment key={tag + Math.random() * 99}>
         <Tag color={color}>{tag.toUpperCase()}</Tag>
@@ -128,6 +98,11 @@ export default function Events() {
      })}
     </>
    ),
+  },
+  {
+   title: 'Направление',
+   dataIndex: 'district',
+   key: 'address',
   },
   {
    title: 'Район',
@@ -162,20 +137,31 @@ export default function Events() {
         Просмотр заявок
        </Button>
        <Divider style={{ height: '100%' }} type="vertical" />
-       <Link href="/account/events/map">Отобразить на карте</Link>
+       <Button
+        type="link"
+        style={{ margin: '0', padding: '0' }}
+        onClick={() => {
+         setMapVisible(!viewMap);
+        }}>
+        {viewMap ? 'Показать списком' : 'Отобразить на карте'}
+       </Button>
       </div>
      </div>
      <div style={{ display: 'flex', gap: '15px' }}>
-      <Table
-       style={{
-        width: '100%',
-        backgroundColor: 'white',
-        padding: '25px',
-        borderRadius: '7px',
-       }}
-       columns={columns}
-       dataSource={test}
-      />
+      {viewMap ? (
+       <Map />
+      ) : (
+       <Table
+        style={{
+         width: '100%',
+         backgroundColor: 'white',
+         padding: '25px',
+         borderRadius: '7px',
+        }}
+        columns={columns}
+        dataSource={test}
+       />
+      )}
       <div
        style={{
         flex: '1 1 25%',

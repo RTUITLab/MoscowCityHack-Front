@@ -12,6 +12,7 @@ import {
 import React from 'react';
 import Badge from '../../components/Badge/Badge';
 import styles from '../../styles/profile.module.scss';
+import { useRouter } from 'next/router';
 
 const { Meta } = Card;
 
@@ -24,6 +25,8 @@ const CardTitle = () => {
 };
 
 const Index = () => {
+ const router = useRouter();
+
  const columns = [
   {
    title: 'Доброе дело',
@@ -185,8 +188,20 @@ const Index = () => {
         gap: '10px',
         justifyContent: 'flex-end',
        }}>
-       <Button type="primary">Выгрузить в PDF</Button>
-       <Button type="primary">Достижения</Button>
+       <Button
+        onClick={() => {
+         window.open('/account/export');
+        }}
+        type="primary">
+        Выгрузить в PDF
+       </Button>
+       <Button
+        type="primary"
+        onClick={() => {
+         router.push('/account/achievements');
+        }}>
+        Достижения
+       </Button>
       </div>
      </div>
      <div style={{ width: '100%' }}>
