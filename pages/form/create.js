@@ -3,6 +3,7 @@ import {Button, Divider, Input, Radio, Select, Slider, Space, Typography} from "
 import Header from "../../components/Header/Header";
 import React, {useState} from "react";
 import Tags from "../../components/Tags/Tags";
+import {district} from "../../utils/data";
 
 const {Title} = Typography
 const {Option} = Select
@@ -106,23 +107,16 @@ export default function CreateEventsAll() {
 				<Tags></Tags>
 			</div>
 		</section>
+		<section>
+			<h3>Адрес</h3>
+			<Input size={"large"}></Input>
+		</section>
 		<section style={{maxWidth: "350px"}}>
 			<h3>Район Москвы</h3>
-			<Select size={"large"} style={{width: "100%"}}>
-
-				<Option value="center">Центральный</Option>
-				<Option value="north">Северный</Option>
-				<Option value="north-east">Северо-Восточный</Option>
-				<Option value="east">Восточный</Option>
-				<Option value="south-east">Юго-Восточный</Option>
-				<Option value="south">Южный</Option>
-				<Option value="south-west">Юго-Западный</Option>
-				<Option value="west">Западный</Option>
-				<Option value="north-west">Северо-Западный</Option>
-				<Option value="zelenograd">Зеленоградский</Option>
-				<Option value="trinity">Троицкий</Option>
-				<Option value="novomoskovsky">Новомосковский</Option>
-				<Option value="allcity">Вся Москва</Option>
+			<Select placeholder={"Район Москвы"} size={"large"} style={{width: "100%"}}>
+				{district.map((e)=>{
+					return <React.Fragment key={e.name}><Option value={e.name}>{e.title}</Option></React.Fragment>
+				})}
 			</Select></section>
 		<section style={{display: "flex", gap: "15px", width: "100%", maxWidth: "900px"}}>
 			<div>
@@ -183,3 +177,4 @@ export default function CreateEventsAll() {
 
 
 CreateEventsAll.prototype.type = "form"
+

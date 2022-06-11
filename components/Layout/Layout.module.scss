@@ -10,8 +10,16 @@
 		height: 100%;
 		overflow: hidden;
 		position: relative;
+	}
+}
 
-
-
+.cartRowDesc{
+	display: block;
+	position: relative;
+	div{
+		max-width: 300px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 }

@@ -2,3 +2,17 @@
  display: flex;
  align-items: center;
 }
+
+.level{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+
+ span{
+  color:white;
+  font-weight: 600;
+  font-size: 24px;
+ }
+}
+
+
