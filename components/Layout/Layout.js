@@ -48,12 +48,30 @@ export default function Layout({ children }) {
        alignItems: 'center',
       }}>
       <Button type="text">
-       <HeartFilled />
-       Избранное
+       <div
+        style={{
+         fontSize: '1.3em',
+         display: 'flex',
+         justifyContent: 'center',
+         alignItems: 'center',
+         gap: '10px',
+        }}>
+        <HeartFilled />
+        Избранное
+       </div>
       </Button>
       <Button type="text">
-       <ShoppingFilled />
-       Корзина
+       <div
+        style={{
+         fontSize: '1.3em',
+         display: 'flex',
+         justifyContent: 'center',
+         alignItems: 'center',
+         gap: '10px',
+        }}>
+        <ShoppingFilled />
+        Корзина
+       </div>
       </Button>
       <Badge count={123} />
      </div>
@@ -99,7 +117,7 @@ export default function Layout({ children }) {
      </Menu>
     </div>
     <div style={{ padding: '30px', marginBottom: '50px' }}>
-     <h2>{title}</h2>
+     <h2 style={{ fontSize: '1.8em' }}>{title}</h2>
      <div>{children}</div>
     </div>
    </div>
