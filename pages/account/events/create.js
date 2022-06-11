@@ -103,7 +103,7 @@ export default function CreateEvents({createdBy}) {
 					</section>
 					<section>
 						<div>
-							<h4>Описание требований</h4>
+							<h4>Описание опций</h4>
 							<TextArea placeholer={"Описание предоставляемых опций"}></TextArea>
 						</div>
 					</section>
