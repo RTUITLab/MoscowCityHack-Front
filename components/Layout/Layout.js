@@ -10,16 +10,16 @@ import {
  UserOutlined,
 } from '@ant-design/icons';
 
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Badge from '../Badge/Badge';
-import MainContext from '../../contexts/MainContext';
+import { useAuth } from '../../contexts/MainContext';
 
 export default function Layout({ children }) {
  const router = useRouter();
  const [activeTab, setActiveTab] = useState('profile');
  const [title, setTitle] = useState('Профиль');
- const [state, setState] = useContext(MainContext);
+ const [state, setState] = useAuth();
 
  useEffect(() => {
   let currentHref = router.pathname;
@@ -160,7 +160,7 @@ const CartRow = (e) => {
 };
 
 const ShopHeader = () => {
- const [state, setState] = useContext(MainContext);
+ const [state, setState] = useAuth();
  return (
   <div
    style={{
