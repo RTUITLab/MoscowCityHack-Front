@@ -1,6 +1,7 @@
 import styles from '../../styles/form-create.module.scss';
 import {
  Button,
+ Checkbox,
  DatePicker,
  Divider,
  Input,
@@ -10,47 +11,20 @@ import {
  Space,
  TimePicker,
  Typography,
- Checkbox,
 } from 'antd';
 import Header from '../../components/Header/Header';
 import React, { useState } from 'react';
 import Tags from '../../components/Tags/Tags';
-import { district } from '../../utils/data';
+import { district, tags as tagsData } from '../../utils/data';
 
 const { Title } = Typography;
 const { Option } = Select;
 const { TextArea } = Input;
 
 export default function CreateEventsAll() {
- const [part, setPart] = useState(0);
+ const [part, setPart] = useState(1);
 
- const [tags, setTags] = useState([
-  { title: 'Фестиваль', active: false },
-  {
-   title: 'НКО',
-   active: false,
-  },
-  { title: 'Культура', active: false },
-  { title: 'Экология', active: false },
-  {
-   title: 'Общество',
-   active: false,
-  },
-  { title: 'Мастер-класс', active: false },
-  { title: 'Выставка', active: false },
-  {
-   title: 'Конкурс',
-   active: false,
-  },
-  { title: 'Ярмарка', active: false },
-  { title: 'Спорт', active: false },
-  {
-   title: 'Дети и молодежь',
-   active: false,
-  },
-  { title: 'Донорство', active: false },
-  { title: 'Животные', active: false },
- ]);
+ const [tags, setTags] = useState(tagsData);
 
  const onTagClick = (i) => {
   let newTags = tags;
@@ -76,6 +50,7 @@ export default function CreateEventsAll() {
    <section>
     <h3>Заявитель</h3>
     <Input
+     key={0}
      onChange={(e) => setState({ fio: e.target.value })}
      size={'large'}
      placeholder={'ФИО'}></Input>
@@ -83,6 +58,7 @@ export default function CreateEventsAll() {
    <section key={'email'}>
     <h3>Электронная почта</h3>
     <Input
+     key={1}
      onChange={(e) => setState({ email: e.target.value })}
      size={'large'}
      type={'email'}></Input>
@@ -90,6 +66,7 @@ export default function CreateEventsAll() {
    <section>
     <h3>Телефон</h3>
     <Input
+     key={-1}
      onChange={(e) => setState({ tel: e.target.value })}
      size={'large'}
      type={'tel'}
@@ -123,7 +100,7 @@ export default function CreateEventsAll() {
   <>
    <section>
     <h3>Название мероприятия</h3>
-    <Input size={'large'}></Input>
+    <Input key={2} size={'large'}></Input>
    </section>
    <section>
     <h3>Направления</h3>
@@ -133,7 +110,8 @@ export default function CreateEventsAll() {
       gap: '10px',
       flexWrap: 'wrap',
       maxWidth: '500px',
-     }}>
+     }}
+     className={styles.tags}>
      {tags.map((e, i) => {
       return (
        <Button
@@ -222,7 +200,7 @@ export default function CreateEventsAll() {
 
  return (
   <div>
-   <Header />
+   <Header disableButtons={true} />
    <div className={styles.parent}>
     <div className={styles.content}>
      <header>

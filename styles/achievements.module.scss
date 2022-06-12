@@ -1,27 +1,47 @@
 .parentContainer {
- display: flex;
- justify-content: flex-start;
- align-items: baseline;
- flex-wrap: wrap;
- width: 100%;
- column-gap: 10%;
- row-gap: 40px;
- margin-top: -3%;
- .achievement {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px; //отступ текста от картинки
-  width: min-content;
-  .description {
-   font-size: 1.3em;
-   font-weight: 600;
-   text-align: center;
-  }
-  transition: transform 0.3s;
-  &:hover {
-   transform: scale(1.15);
-   cursor: pointer;
-  }
- }
+	display: flex;
+	justify-content: flex-start;
+	align-items: baseline;
+	flex-wrap: wrap;
+	width: 100%;
+	gap: 15px;
+	margin-top: -3%;
+
+	.achievement {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: min-content;
+		height: 250px;
+		gap: 15px;
+		position: relative;
+		overflow: hidden;
+
+		img {
+			width: 100px;
+			height: 100px;
+			object-fit: contain;
+		}
+
+		.description {
+			font-family: "Rubik";
+			flex: 1 1 100%;
+			height: 100px;
+			margin-top: 10px;
+			align-items: center;
+			justify-content: center;
+			display: flex;
+			text-align: center;
+			font-weight: 700;
+			line-height: 1;
+			color: gray;
+		}
+
+		transition: transform 0.3s;
+
+		&:hover {
+			transform: scale(1.15);
+			cursor: pointer;
+		}
+	}
 }

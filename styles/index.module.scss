@@ -1,26 +1,30 @@
 .parentContainer {
- .contentContainer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1200px;
-  align-items: center;
-  padding: 15px;
+	.contentContainer {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		max-width: 1500px;
+		align-items: center;
+		padding: 15px;
+		gap: 20%;
 
-  .imageContainer {
-   img {
-    width: 40vw;
-   }
-  }
+		.imageContainer {
+			img {
+				width: 40vw;
+			}
+		}
 
-  .textContainer {
-   height: 100%;
-   display: grid;
+		.textContainer {
+			height: 100%;
+			display: grid;
 
-   h1 {
-    margin: 0;
-    line-height: 1.4;
-   }
-  }
- }
+			h1 {
+				font-family: 'Rubik';
+				font-weight: 700;
+				font-size: 32px;
+				margin: 0;
+				line-height: 1.4;
+			}
+		}
+	}
 }

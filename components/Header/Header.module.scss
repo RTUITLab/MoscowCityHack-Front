@@ -1,35 +1,45 @@
 .parent {
- height: 50px;
- width: 100%;
- background-color: #cc2222;
- display: flex;
- justify-content: space-between;
- align-items: center;
- padding-left: 20px;
- font-size: 1.5em;
- .accountButton {
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px;
-  font-size: 0.8em;
-  align-items: center;
-  flex-direction: row;
-  color: white;
-  padding-right: 3%;
-  .arrow {
-   transition: transform 0.5s;
-  }
-  &:hover {
-   .arrow {
-    transform: rotate(180deg);
-   }
-  }
- }
- span {
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 24px;
-  color: #ffffff;
-  cursor: pointer;
- }
+	height: 50px;
+	width: 100%;
+	background-color: #cc2222;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5em;
+
+	.buttonContainer {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		max-width: 1400px;
+	}
+
+	.accountButton {
+		display: flex;
+		justify-content: flex-start;
+		gap: 10px;
+		font-size: 0.8em;
+		align-items: center;
+		flex-direction: row;
+		color: white;
+		padding-right: 3%;
+
+		.arrow {
+			transition: transform 0.5s;
+		}
+
+		&:hover {
+			.arrow {
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	span {
+		font-weight: 700;
+		font-size: 15px;
+		line-height: 24px;
+		color: #ffffff;
+		cursor: pointer;
+	}
 }

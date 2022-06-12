@@ -1,6 +1,7 @@
 import {
  Button,
  Checkbox,
+ DatePicker,
  Divider,
  Input,
  Select,
@@ -8,7 +9,6 @@ import {
  Table,
  Tag,
  TimePicker,
- DatePicker,
 } from 'antd';
 import { useRouter } from 'next/router';
 import styles from '../../../styles/events.module.scss';
@@ -117,7 +117,7 @@ export default function Events() {
   <GraphQLProvider>
    <div className={styles.parentContainer}>
     <div style={{ flex: '1 1 100%' }} className={styles.content}>
-     <ExchangeRates />
+     {/*<ExchangeRates />*/}
      <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
       <div>
        <Input placeholder={'Поиск'}></Input>
@@ -207,6 +207,7 @@ export default function Events() {
        <section>
         <h3>Местоположение</h3>
         <Select
+         mode="multiple"
          placeholder={'Район Москвы'}
          size={'large'}
          style={{ width: '100%' }}>
@@ -227,21 +228,6 @@ export default function Events() {
          size={'large'}
          style={{ width: '100%' }}>
          {tags.map((e) => {
-          return (
-           <React.Fragment key={e.name}>
-            <Option value={e.name}>{e.title}</Option>
-           </React.Fragment>
-          );
-         })}
-        </Select>
-       </section>
-       <section>
-        <h3>Требования</h3>
-        <Select
-         placeholder={'Район Москвы'}
-         size={'large'}
-         style={{ width: '100%' }}>
-         {district.map((e) => {
           return (
            <React.Fragment key={e.name}>
             <Option value={e.name}>{e.title}</Option>
