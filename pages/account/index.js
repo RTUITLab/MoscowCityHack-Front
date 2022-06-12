@@ -9,17 +9,17 @@ import {
  Statistic,
  Table,
 } from 'antd';
-import React, { useContext } from 'react';
+import React from 'react';
 import Badge from '../../components/Badge/Badge';
 import styles from '../../styles/profile.module.scss';
 import { useRouter } from 'next/router';
-import MainContext from '../../contexts/MainContext.js';
+import { useAuth } from '../../contexts/MainContext.js';
 
 const { Meta } = Card;
 
 const Index = () => {
  const router = useRouter();
- const [state, setState] = useContext(MainContext);
+ const [state, setState] = useAuth();
  const user = state.user;
 
  const columns = [

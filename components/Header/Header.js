@@ -1,14 +1,14 @@
 import styles from './Header.module.scss';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
-import MainContext from '../../contexts/MainContext';
+import { useAuth } from '../../contexts/MainContext';
+import { useEffect, useState } from 'react';
 import { Button, Input, Popover } from 'antd';
 import { ArrowDownOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
 
 export default function Header({ disableButtons }) {
- const [state, setState] = useContext(MainContext);
+ const [state, setState] = useAuth();
  const router = useRouter();
  const [search, setSearchString] = useState('');
 
@@ -56,7 +56,7 @@ export default function Header({ disableButtons }) {
        return (
         <div style={{ display: 'grid', gap: '15px' }}>
          <Button>Настройки</Button>
-         <Button>Выйти</Button>
+         <Button onClick={() => setState({ isLoggedIn: false })}>Выйти</Button>
         </div>
        );
       }}
