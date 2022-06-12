@@ -3,9 +3,9 @@
  width: 100%;
  background-color: #cc2222;
  display: flex;
+ justify-content: space-between;
  align-items: center;
  padding-left: 20px;
- gap: 70%;
  font-size: 1.5em;
  .accountButton {
   display: flex;
@@ -15,6 +15,7 @@
   align-items: center;
   flex-direction: row;
   color: white;
+  padding-right: 3%;
   .arrow {
    transition: transform 0.5s;
   }
