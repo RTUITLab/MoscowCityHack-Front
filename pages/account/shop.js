@@ -3,7 +3,7 @@ import { Card, Image } from 'antd';
 import {
  HeartOutlined,
  HeartFilled,
- ShoppingCartOutlined,
+ ShoppingOutlined,
  ShoppingFilled,
 } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
@@ -43,7 +43,7 @@ function ShopCard(props) {
    onClick={() => props.handleAddCart(id)}
   />
  ) : (
-  <ShoppingCartOutlined
+  <ShoppingOutlined
    key="add"
    className={styles.action}
    onClick={() => props.handleAddCart(id)}
