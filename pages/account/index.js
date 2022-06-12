@@ -9,23 +9,18 @@ import {
  Statistic,
  Table,
 } from 'antd';
-import React from 'react';
+import React, { useContext } from 'react';
 import Badge from '../../components/Badge/Badge';
 import styles from '../../styles/profile.module.scss';
 import { useRouter } from 'next/router';
+import MainContext from '../../contexts/MainContext.js';
 
 const { Meta } = Card;
 
-const CardTitle = () => {
- return (
-  <div className={styles.cardTitle}>
-   <h3 className={styles.name}>Костик Иванов</h3>
-  </div>
- );
-};
-
 const Index = () => {
  const router = useRouter();
+ const [state, setState] = useContext(MainContext);
+ const user = state.user;
 
  const columns = [
   {
@@ -91,11 +86,10 @@ const Index = () => {
      className={styles.userCard}
      cover={
       <>
-       <CardTitle />
-       <Image
-        alt="Ваше фото"
-        src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
-       />
+       <div className={styles.cardTitle}>
+        <h3 className={styles.name}>{user.name}</h3>
+       </div>
+       <Image alt="Ваше фото" src={user.avatar} />
       </>
      }
      actions={[<SettingOutlined key="setting" />]}>
@@ -113,16 +107,19 @@ const Index = () => {
        <div style={{ display: 'flex', justifyContent: 'center' }}>
         <div style={{ display: 'grid', gap: '15px', justifyContent: 'center' }}>
          <div>
-          <Badge type={'level'} count={5}></Badge>
+          <Badge type={'level'} count={user.exp.toString()[0]}></Badge>
          </div>
          <div className={styles.status}>
           <Progress
-           percent={70}
+           percent={user.exp % 100}
            className={styles.statusBar}
            showInfo={false}
           />
           <div style={{ fontSize: '14px', color: 'gray' }}>
-           200 до след. уровня
+           {100 - (user.exp % 100)} до след. уровня{' '}
+           {
+            //Что если уровень больше 1000?..
+           }
           </div>
          </div>
         </div>
@@ -133,7 +130,7 @@ const Index = () => {
    </div>
 
    <div className={styles.statsWrapper}>
-    <div style={{ display: 'flex', justifyContent: 'flex-start', gap: '30px' }}>
+    <div style={{ display: 'flex', justifyContent: 'flex-start', gap: '8%' }}>
      <div>
       <span
        style={{
@@ -143,27 +140,25 @@ const Index = () => {
        }}>
        Баллы добра
       </span>
-      <div style={{ height: '2.5px' }}></div>
       <div
-       style={{ display: 'flex', marginLeft: '15px', alignItems: 'center' }}>
+       style={{
+        display: 'flex',
+        alignItems: 'center',
+       }}>
        <Badge />
        <span style={{ fontSize: '2em' }}>26562</span>
       </div>
      </div>
-     <div>
-      <Statistic
-       title={<span style={{ fontSize: 1.4 + 'em' }}>Часов работы</span>}
-       value={25}
-       valueStyle={{ fontSize: 2 + 'em' }}
-      />
-     </div>
-     <div>
-      <Statistic
-       title={<span style={{ fontSize: 1.4 + 'em' }}>Мероприятия</span>}
-       value={5}
-       valueStyle={{ fontSize: 2 + 'em' }}
-      />
-     </div>
+     <Statistic
+      title={<span style={{ fontSize: '1.4em' }}>Часов работы</span>}
+      value={25}
+      valueStyle={{ fontSize: '2em', textAlign: 'center' }}
+     />
+     <Statistic
+      title={<span style={{ fontSize: '1.4em' }}>Мероприятия</span>}
+      value={5}
+      valueStyle={{ fontSize: '2em', textAlign: 'center' }}
+     />
     </div>
     <Row
      justify="center"
