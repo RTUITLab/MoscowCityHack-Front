@@ -5,10 +5,12 @@ export default function Map() {
  let k = 0;
 
  useEffect(() => {
-  // if (k == 0) {
-  //  k++;
-  //  ymaps.ready(init);
-  // }
+  if (k == 0) {
+   k++;
+   try {
+    ymaps.ready(init);
+   } catch (e) {}
+  }
  }, []);
 
  function init() {
