@@ -1,9 +1,10 @@
 .profileWrapper {
  width: 100%;
  display: flex;
- gap:35px;
+ gap: 35px;
  justify-content: center;
  min-width: 900px;
+ margin-top: -3%;
  .userCard {
   display: flex;
   flex-direction: column;
@@ -36,7 +37,6 @@
      width: 100%;
      white-space: nowrap;
      text-align: center;
-
     }
     .statusBar {
      width: 90%;

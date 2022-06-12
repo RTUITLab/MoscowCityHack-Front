@@ -160,6 +160,7 @@ const CartRow = (e) => {
 };
 
 const ShopHeader = () => {
+ const [state, setState] = useContext(MainContext);
  return (
   <div
    style={{
@@ -185,7 +186,13 @@ const ShopHeader = () => {
       );
      }}
      placement="bottomLeft">
-     <Button type="text">
+     <Button
+      type="text"
+      style={{
+       fontSize: '0.9em',
+       display: 'flex',
+       alignItems: 'center',
+      }}>
       <HeartFilled />
       Избранное
      </Button>
@@ -211,12 +218,14 @@ const ShopHeader = () => {
       );
      }}
      placement="bottomLeft">
-     <Button type="text">
+     <Button
+      type="text"
+      style={{ fontSize: '0.9em', display: 'flex', alignItems: 'center' }}>
       <ShoppingFilled />
       Корзина
      </Button>
     </Popover>
-    <Badge count={123} />
+    <Badge count={state.user.points} />
    </div>
   </div>
  );
