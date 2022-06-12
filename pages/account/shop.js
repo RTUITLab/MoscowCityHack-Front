@@ -1,67 +1,119 @@
 import styles from '../../styles/shop.module.scss';
 import { Card, Image } from 'antd';
-import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-import React from 'react';
+import {
+ HeartOutlined,
+ HeartFilled,
+ ShoppingCartOutlined,
+ ShoppingFilled,
+} from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { useAuth } from '../../contexts/MainContext';
+import Badge from '../../components/Badge/Badge';
 
 const { Meta } = Card;
 
 function ShopCard(props) {
+ let data = props.data;
+ let [id, imgSrc, title, price, description, liked, inCart] = [
+  data.id,
+  data.imgSrc,
+  data.title,
+  data.price,
+  data.description,
+  data.liked,
+  data.inCart,
+ ];
+ let heart = liked ? (
+  <HeartFilled
+   key="like"
+   className={styles.action}
+   onClick={() => props.handleLike(id)}
+  />
+ ) : (
+  <HeartOutlined
+   key="like"
+   className={styles.action}
+   onClick={() => props.handleLike(id)}
+  />
+ );
+ let shoppingCart = inCart ? (
+  <ShoppingFilled
+   key="add"
+   className={styles.action}
+   onClick={() => props.handleAddCart(id)}
+  />
+ ) : (
+  <ShoppingCartOutlined
+   key="add"
+   className={styles.action}
+   onClick={() => props.handleAddCart(id)}
+  />
+ );
  return (
   <div className={styles.cardWrapper}>
    <Card
+    bodyStyle={{
+     height: 160,
+    }}
     cover={
      <Image
       alt="example"
-      src={props.imgSrc}
+      src={imgSrc}
       width="50"
       height="50"
       objectFit="cover"
      />
     }
-    actions={[
-     <HeartOutlined key="like" className={styles.action} />,
-     <ShoppingCartOutlined key="add" className={styles.action} />,
-    ]}>
-    <Meta title={props.title} description={props.cost.toString()} />
+    actions={[heart, shoppingCart]}>
+    <Meta
+     title={title}
+     description={
+      <div className={styles.meta}>
+       {description}
+       <div className={styles.price}>
+        <Badge />
+        <div style={{ display: 'flex', alignItems: 'center' }}>{price}</div>
+       </div>
+      </div>
+     }
+    />
    </Card>
   </div>
  );
 }
 
 export default function Shop() {
- let imgSrc =
-  'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80';
- let rows = [
-  {
-   imgSrc: imgSrc,
-   title: 'Футболка',
-   cost: 9599,
-  },
-  {
-   imgSrc: imgSrc,
-   title: 'Кепка',
-   cost: 9599,
-  },
-  {
-   imgSrc: imgSrc,
-   title: 'Рюкзак',
-   cost: 9599,
-  },
-  {
-   imgSrc: imgSrc,
-   title: 'Самолет',
-   cost: 9599,
-  },
-  {
-   imgSrc: imgSrc,
-   title: 'Самолет',
-   cost: 9599,
-  },
- ];
+ /*const [favourite, setFavourite] = useState([]);
+ const [shoppingCart, setShoppingCart] = useState([]);*/
+ const [state, setState] = useAuth();
+
+ function handleLike(id) {
+  let curItems = state.shop.items;
+  let hasLike = curItems.some((el) => el.id === id && el.liked);
+  curItems[curItems.findIndex((el) => el.id === id)].liked = hasLike
+   ? false
+   : true;
+  setState({ items: curItems });
+ }
+
+ function handleAddCart(id) {
+  let curItems = state.shop.items;
+  let inCart = curItems.some((el) => el.id === id && el.inCart);
+  curItems[curItems.findIndex((el) => el.id === id)].inCart = inCart
+   ? false
+   : true;
+  setState({ items: curItems });
+ }
+
  return (
   <div className={styles.shopWrapper}>
-   {rows.map((el, i) => (
-    <ShopCard key={i} imgSrc={el.imgSrc} title={el.title} cost={el.cost} />
+   {state.shop.items.map((el, i) => (
+    <ShopCard
+     key={i}
+     data={el}
+     handleAddCart={handleAddCart}
+     handleLike={handleLike}
+    />
    ))}
   </div>
  );

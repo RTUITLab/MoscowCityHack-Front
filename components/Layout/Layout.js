@@ -157,7 +157,7 @@ export default function Layout({ children }) {
  );
 }
 
-const CartRow = (e) => {
+function CartRow({ data }) {
  return (
   <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
    <img
@@ -168,20 +168,16 @@ const CartRow = (e) => {
     alt=""
    />
    <div className={styles.cartRowDesc} style={{}}>
-    <span>Тест какой-то</span>
+    <span>{data.title}</span>
     <br />
-    <div>
-     Lorem ipsum dolor sit amet, consectetur adipisicing elit. At beatae dolorum
-     hic nesciunt, officiis pariatur!
-    </div>
+    <div>{data.description}</div>
    </div>
    <div>
     <HeartFilled />
-    <HeartOutlined />
    </div>
   </div>
  );
-};
+}
 
 const ShopHeader = () => {
  const [state, setState] = useAuth();
@@ -204,8 +200,11 @@ const ShopHeader = () => {
      content={() => {
       return (
        <div style={{ display: 'grid', gap: '15px' }}>
-        <CartRow></CartRow>
-        <CartRow></CartRow>
+        {state.shop.items
+         .filter((data) => data.liked)
+         .map((data, i) => (
+          <CartRow key={i} data={data}></CartRow>
+         ))}
        </div>
       );
      }}
@@ -225,8 +224,11 @@ const ShopHeader = () => {
      content={() => {
       return (
        <div style={{ display: 'grid', gap: '15px' }}>
-        <CartRow></CartRow>
-        <CartRow></CartRow>
+        {state.shop.items
+         .filter((data) => data.inCart)
+         .map((data, i) => (
+          <CartRow key={i} data={data}></CartRow>
+         ))}
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
          <Button
           style={{ width: 'fit-content' }}
