@@ -3,7 +3,7 @@ import { Button, Divider, Menu, Modal, PageHeader, Popover } from 'antd';
 import styles from './Layout.module.scss';
 import {
  HeartFilled,
- HeartOutlined,
+ DeleteOutlined,
  MailOutlined,
  ReadOutlined,
  ShoppingCartOutlined,
@@ -160,7 +160,22 @@ export default function Layout({ children }) {
  );
 }
 
-function CartRow({ data }) {
+function CartRow(props) {
+ const [state, setState] = useAuth();
+ let data = props.data;
+ let inElem = props.inElem;
+ function deleteFromCart() {
+  let id = data.id;
+  let curItems = state.shop.items;
+  let indexElem = curItems.findIndex((el) => el.id === id);
+  curItems[indexElem].inCart = false;
+  setState({
+   shop: {
+    items: curItems,
+    totalCardPrice: state.shop.totalCardPrice - curItems[indexElem].price,
+   },
+  });
+ }
  return (
   <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
    <img
@@ -175,9 +190,13 @@ function CartRow({ data }) {
     <br />
     <div>{data.description}</div>
    </div>
-   <div>
-    <HeartFilled />
-   </div>
+   {inElem === 'card' ? (
+    <div>
+     <DeleteOutlined onClick={deleteFromCart} />
+    </div>
+   ) : (
+    <></>
+   )}
   </div>
  );
 }
@@ -206,7 +225,7 @@ const ShopHeader = () => {
         {state.shop.items
          .filter((data) => data.liked)
          .map((data, i) => (
-          <CartRow key={i} data={data}></CartRow>
+          <CartRow key={i} data={data} inElem={'likes'}></CartRow>
          ))}
        </div>
       );
@@ -230,16 +249,30 @@ const ShopHeader = () => {
         {state.shop.items
          .filter((data) => data.inCart)
          .map((data, i) => (
-          <CartRow key={i} data={data}></CartRow>
+          <CartRow key={i} data={data} inElem={'card'}></CartRow>
          ))}
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <div
+         style={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+         }}>
+         <div
+          style={{
+           display: 'flex',
+           justifyContent: 'space-between',
+           alignItems: 'center',
+          }}>
+          <span>Итого:</span>
+          <span>{state.shop.totalCardPrice}</span>
+         </div>
          <Button
-          style={{ width: 'fit-content' }}
+          style={{ width: '100%', marginTop: '3%' }}
           type={'primary'}
           onClick={() => {
            setState({ showCart: true });
           }}>
-          Оформить заказ
+          Перейти к оформлению
          </Button>
         </div>
        </div>

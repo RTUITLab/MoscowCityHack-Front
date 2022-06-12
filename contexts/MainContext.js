@@ -99,6 +99,7 @@ const testState = {
     inCart: false,
    },
   ],
+  totalCardPrice: 0,
  },
  user: {
   // = moderator

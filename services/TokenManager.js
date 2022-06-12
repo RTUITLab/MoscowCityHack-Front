@@ -14,13 +14,13 @@ export class TokenManager {
 		}
 		 `
    )
-  ).data.authorize;
+  )?.data?.authorize;
 
   console.log(token, login, password);
-  if (token.token === 'incorrect login or password') return undefined;
+  if (token?.token === 'incorrect login or password') return undefined;
 
-  localStorage.setItem('ACCESS_TOKEN', token.token);
-  localStorage.setItem('ROLE', token.role);
+  localStorage.setItem('ACCESS_TOKEN', token?.token);
+  localStorage.setItem('ROLE', token?.role);
   return token;
  }
 

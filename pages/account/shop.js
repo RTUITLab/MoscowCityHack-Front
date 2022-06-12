@@ -98,11 +98,26 @@ export default function Shop() {
 
  function handleAddCart(id) {
   let curItems = state.shop.items;
-  let inCart = curItems.some((el) => el.id === id && el.inCart);
-  curItems[curItems.findIndex((el) => el.id === id)].inCart = inCart
-   ? false
-   : true;
-  setState({ items: curItems });
+  let alreadyInCart = curItems.some((el) => el.id === id && el.inCart);
+  let indexElem = curItems.findIndex((el) => el.id === id);
+  if (alreadyInCart) {
+   //удалить
+   curItems[indexElem].inCart = false;
+   setState({
+    shop: {
+     items: curItems,
+     totalCardPrice: state.shop.totalCardPrice - curItems[indexElem].price,
+    },
+   });
+  } else {
+   curItems[indexElem].inCart = true;
+   setState({
+    shop: {
+     items: curItems,
+     totalCardPrice: state.shop.totalCardPrice + curItems[indexElem].price,
+    },
+   });
+  }
  }
 
  return (
