@@ -1,10 +1,7 @@
 import styles from '../../../styles/learning.module.scss';
 import { Button } from 'antd';
-import { useUser } from '../../../contexts/MainContext';
 
 export default function LearningPage() {
- const [user, setUser] = useUser();
-
  return (
   <div className={styles.parentContainer}>
    <div className={styles.contentContainer}>

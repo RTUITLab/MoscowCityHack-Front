@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { TokenManager } from './TokenManager';
 
 export function getUsers(queryProps, data) {
  let query;
@@ -82,11 +83,16 @@ export function sendData(mutationProps, data) {
 }
 
 export function createQuery(query) {
+ const TOKEN =
+  new TokenManager().getToken(undefined, undefined, {
+   new: false,
+  }) || '';
  return fetch(process.env.NEXT_PUBLIC_API_HOST, {
   method: 'POST',
   headers: {
    'Content-Type': 'application/json',
    Accept: 'application/json',
+   Authorization: `Bearer ${TOKEN}`,
   },
   body: JSON.stringify({
    query: query,
@@ -120,6 +126,7 @@ export function useQuery(query) {
    headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
+    Authorization: `Bearer ${new TokenManager().getToken(0, 0)}`,
    },
    body: JSON.stringify({
     query: query,

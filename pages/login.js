@@ -53,12 +53,12 @@ export default function LoginPage() {
    sendData(type, form)
     .then(async (e) => {
      if (e.data.createVolunteer.id) {
-      setState({ isLoggedIn: true });
       const token = await tokenManager.getToken(form.login, form.password, {
        new: true,
       });
 
       if (token) {
+       setState({ isLoggedIn: true });
        router.push('/account');
       } else {
        message.error('Произошла ошибка');

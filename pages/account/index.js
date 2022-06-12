@@ -10,11 +10,12 @@ import {
  Statistic,
  Table,
 } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Badge from '../../components/Badge/Badge';
 import styles from '../../styles/profile.module.scss';
 import { useRouter } from 'next/router';
 import { useAuth, useUser } from '../../contexts/MainContext.js';
+import { createQuery } from '../../services';
 
 const { Meta } = Card;
 
@@ -22,6 +23,16 @@ const Index = () => {
  const router = useRouter();
  const [state, setState] = useAuth();
  const [user, setU] = useUser();
+
+ useEffect(() => {
+  createQuery(`
+   query{
+			getVolunteerByToken{id}
+		}
+  `).then((r) => {
+   console.log(r);
+  });
+ }, []);
 
  const columns = [
   {
