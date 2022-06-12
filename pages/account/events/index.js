@@ -7,6 +7,8 @@ import {
  Space,
  Table,
  Tag,
+ TimePicker,
+ DatePicker,
 } from 'antd';
 import { useRouter } from 'next/router';
 import styles from '../../../styles/events.module.scss';
@@ -164,7 +166,7 @@ export default function Events() {
       )}
       <div
        style={{
-        flex: '1 1 25%',
+        flex: '1 1 35%',
         position: 'picker',
         top: '25px',
         backgroundColor: 'white',
@@ -178,21 +180,21 @@ export default function Events() {
        <section>
         <h3>Дата проведения</h3>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-         <Input type={'date'} />
+         <DatePicker format={'DD/MM/YYYY'} />
          <ArrowRightOutlined />
-         <Input type={'date'} />
+         <DatePicker format={'DD/MM/YYYY'} />
         </div>
        </section>
        <section>
         <h3>Время проведения</h3>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-         <Input type={'time'} />
+         <TimePicker format={'HH:mm'} />
          <ArrowRightOutlined />
-         <Input type={'time'} />
+         <TimePicker format={'HH:mm'} />
         </div>
        </section>
        <section>
-        <h3>Время проведения</h3>
+        <h3>Тип мероприятия</h3>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
          <Checkbox.Group style={{ width: '100%' }}>
           <Space direction="vertical">
