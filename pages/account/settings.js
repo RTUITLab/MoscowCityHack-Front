@@ -1,6 +1,7 @@
 import styles from '../../styles/account-settings.module.scss';
-import { Button, Input } from 'antd';
+import { Button, Input, DatePicker } from 'antd';
 import { useRouter } from 'next/router';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 export default function AccountSettings() {
  const router = useRouter();
@@ -19,7 +20,12 @@ export default function AccountSettings() {
      </div>
      <div>
       <h3>Дата рождения</h3>
-      <Input size={'large'} type={'date'}></Input>
+      <DatePicker
+       style={{ width: '100%' }}
+       placeholder={'Выбрать дату'}
+       type={'date'}
+       size={'large'}
+      />
      </div>
      <div>
       <h3>Логин</h3>
@@ -27,7 +33,12 @@ export default function AccountSettings() {
      </div>
      <div>
       <h3>Пароль</h3>
-      <Input size={'large'} type={'password'}></Input>
+      <Input.Password
+       size={'large'}
+       iconRender={(visible) =>
+        visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+       }
+      />
      </div>
     </div>
     <div className={styles.rightContainer}>
