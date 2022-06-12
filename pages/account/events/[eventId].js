@@ -1,65 +1,27 @@
 import styles from '../../../styles/eventPage.module.scss';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Button, Image, Progress, Divider, Tag } from 'antd';
+import { Button, Image, Progress, Tag } from 'antd';
 import {
  HomeOutlined,
  FieldTimeOutlined,
  InfoCircleOutlined,
 } from '@ant-design/icons';
+import { useAuth } from '../../../contexts/MainContext';
 
 export default function EventPage() {
+ const [state, setState] = useAuth();
  const router = useRouter();
  const [project, setProject] = useState('empty');
  const { eventId } = router.query;
- function getData() {
-  try {
-   setProject({
-    title: 'Волонтеры охотники за приведениями',
-    online: 'online',
-    imgSrc:
-     'https://images.unsplash.com/photo-1634840647366-e755dc76882d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1620&q=80',
-    directions: [
-     'природа',
-     'приведения',
-     'донорство',
-     'донорство',
-     'донорство',
-    ],
-    companyName: 'название компании тут: добрые дела',
-    address: 'адрес проспект вернадского',
-    tags: ['tag', 'tag', 'tag', 'tag'],
-    capacity: [6, 10], //[занято,всего]
-    date: 5361277778935,
-    taskDescription: [
-     'поимка приведений',
-     'мытье пола',
-     'ааааааа',
-     'ааааааа',
-     'ааааааа',
-     'ааааааа',
-    ],
-    requirements: [
-     'прохождение обучения',
-     'есть машина',
-     'любите зефир',
-     'старше 18',
-    ],
-    facilities: ['питание', 'поможем лайками'],
-    materials: [
-     'https://images.unsplash.com/photo-1634840647366-e755dc76882d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1620&q=80',
-     'https://images.unsplash.com/photo-1634840647366-e755dc76882d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1620&q=80',
-     'https://images.unsplash.com/photo-1634840647366-e755dc76882d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1620&q=80',
-     'https://images.unsplash.com/photo-1634840647366-e755dc76882d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1620&q=80',
-    ],
-   });
-  } catch (err) {
-   setProject('empty');
-  }
+ function getData(id) {
+  project = state.user.eventsParticipate[id];
  }
+
  useEffect(() => {
-  getData();
+  getData(0);
  }, [eventId]);
+
  return (
   <>
    {project === 'empty' ? (
@@ -88,7 +50,12 @@ export default function EventPage() {
       }
      </header>
      <section className={styles.projectTop}>
-      <Image src={project.imgSrc} width={600} />
+      <Image
+       src={project.imgSrc}
+       width={400}
+       height={480}
+       style={{ objectFit: 'cover' }}
+      />
       <div className={styles.imgAside}>
        <h4>Направления</h4>
        <div className={styles.directions}>
@@ -164,9 +131,11 @@ export default function EventPage() {
       </ul>
       <h3>Материалы</h3>
       <div className={styles.materials}>
-       {project.materials.map((img, i) => (
-        <Image src={img} key={i} width={350} />
-       ))}
+       <Image.PreviewGroup>
+        {project.materials.map((img, i) => (
+         <Image src={img} key={i} width={350} />
+        ))}
+       </Image.PreviewGroup>
       </div>
      </section>
     </div>

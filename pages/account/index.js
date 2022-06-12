@@ -22,6 +22,10 @@ const Index = () => {
  const [state, setState] = useAuth();
  const user = state.user;
 
+ if (user.type === 'company') {
+  return;
+ }
+
  const columns = [
   {
    title: 'Доброе дело',

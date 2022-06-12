@@ -37,8 +37,8 @@ function ExchangeRates() {
  `);
  console.log(error, data, 'FFF');
  if (loading) return <p>Loading...</p>;
- if (error) return <p>Error :(</p>;
- return null;
+ else if (error) return <p>Error :(</p>;
+ else return null;
 }
 
 export default function Events() {

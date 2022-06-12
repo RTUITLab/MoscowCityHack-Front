@@ -5,8 +5,6 @@ import { useEffect, useState } from 'react';
 import { Button, Input, Popover } from 'antd';
 import { ArrowDownOutlined } from '@ant-design/icons';
 
-const { Search } = Input;
-
 export default function Header({ disableButtons }) {
  const [state, setState] = useAuth();
  const router = useRouter();
@@ -56,7 +54,9 @@ export default function Header({ disableButtons }) {
        return (
         <div style={{ display: 'grid', gap: '15px' }}>
          <Button>Настройки</Button>
-         <Button onClick={() => setState({ isLoggedIn: false })}>Выйти</Button>
+         <Button onClick={() => setState({ isLoggedIn: false, user: {} })}>
+          Выйти
+         </Button>
         </div>
        );
       }}

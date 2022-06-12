@@ -25,7 +25,6 @@ function ContextProvider({ children }) {
 function RequireAuth({ children }) {
  const isLoggedIn = useAuth()[0].isLoggedIn;
  const router = useRouter();
- console.log(isLoggedIn);
  if (
   !isLoggedIn &&
   router.pathname !== '/' &&
@@ -42,31 +41,53 @@ function RequireAuth({ children }) {
 export { useAuth, ContextProvider };
 
 const testState = {
- isLoggedIn: false,
- type: 'person', // moderator/organization
+ isLoggedIn: true,
+ type: 'person', // moderator/company
  user: {
-  name: 'Павел Сыроедов',
+  // = moderator
+  name: 'Павел',
+  surname: 'Сыроедов',
+  birthdate: 4121234,
+  /*login: '',
+  password: '',*/
   avatar:
    'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
   exp: 370,
   points: 14323,
+  eventsParticipate: [eventProto, eventProto, eventProto],
   achievements: [
-   { imgSrc: '/images/achieve1.svg', description: 'Помощь пожилым людям' },
-   { imgSrc: '/images/blueBadge.svg', description: 'Помощь молодым людям' },
-   { imgSrc: '/images/achieve2.svg', description: 'Лучший' },
-   { imgSrc: '/images/achieve1.svg', description: 'Помощь пожилым людям' },
-   { imgSrc: '/images/badge.png', description: 'Помощь пожилым людям' },
-   { imgSrc: '/images/achieve1.svg', description: 'Помощь пожилым людям' },
-   { imgSrc: '/images/achieve2.svg', description: 'Лучший волонтер' },
-   { imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
-   { imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
-   { imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
-   { imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
-   { imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
-   { imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
-   { imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
-   { imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
-   { imgSrc: '/images/achieve1.svg', description: 'Поможем лайками' },
+   {
+    id: 1,
+    imgSrc: '/images/achieve1.svg',
+    description: 'Помощь пожилым людям',
+   },
+   {
+    id: 2,
+    imgSrc: '/images/blueBadge.svg',
+    description: 'Помощь молодым людям',
+   },
+   { id: 3, imgSrc: '/images/achieve2.svg', description: 'Лучший' },
+   {
+    id: 4,
+    imgSrc: '/images/achieve1.svg',
+    description: 'Помощь пожилым людям',
+   },
+   { id: 5, imgSrc: '/images/badge.png', description: 'Помощь пожилым людям' },
+   {
+    id: 6,
+    imgSrc: '/images/achieve1.svg',
+    description: 'Помощь пожилым людям',
+   },
+   { id: 7, imgSrc: '/images/achieve2.svg', description: 'Лучший волонтер' },
+   { id: 8, imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
+   { id: 9, imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
+   { id: 10, imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
+   { id: 11, imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
+   { id: 12, imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
+   { id: 13, imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
+   { id: 14, imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
+   { id: 15, imgSrc: '/images/blueBadge.svg', description: '100 друзей' },
+   { id: 16, imgSrc: '/images/achieve1.svg', description: 'Поможем лайками' },
   ],
  },
 };
