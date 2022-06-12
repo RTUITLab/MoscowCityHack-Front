@@ -29,10 +29,7 @@ export default function Layout({ children }) {
   } else if (currentHref === '/account/achievements') {
    setActiveTab('profile');
    setTitle(
-    <PageHeader
-     onBack={() => router.push('/account/events')}
-     title="Достижения"
-    />
+    <PageHeader onBack={() => router.push('/account')} title="Достижения" />
    );
   } else if (currentHref === '/account/events') {
    setActiveTab('events');
@@ -77,6 +74,14 @@ export default function Layout({ children }) {
        key={'events'}
        icon={<MailOutlined />}>
        Мероприятия
+      </Menu.Item>
+      <Menu.Item
+       onClick={() => {
+        router.push('/account/points');
+       }}
+       key={'points'}
+       icon={<MailOutlined />}>
+       Мои бонусы
       </Menu.Item>
       <Menu.Item
        onClick={() => {
