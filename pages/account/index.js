@@ -115,7 +115,7 @@ const Index = () => {
        <div style={{ display: 'flex', justifyContent: 'center' }}>
         <div style={{ display: 'grid', gap: '15px', justifyContent: 'center' }}>
          <div>
-          <Badge type={'level'} count={user.exp.toString()[0]}></Badge>
+          <Badge type={'level'} count={user?.exp?.toString()[0]}></Badge>
          </div>
          <div className={styles.status}>
           <Progress
