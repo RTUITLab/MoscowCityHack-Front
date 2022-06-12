@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
+import Script from 'next/script';
 
 export default function Map() {
  let k = 0;
 
  useEffect(() => {
-  if (k == 0) {
-   k++;
-   ymaps.ready(init);
-  }
+  // if (k == 0) {
+  //  k++;
+  //  ymaps.ready(init);
+  // }
  }, []);
 
  function init() {
@@ -35,11 +36,25 @@ export default function Map() {
 
  return (
   <div
-   id={'map-container'}
    style={{
     height: '100%',
     width: '100%',
     borderRadius: '4px',
-   }}></div>
+   }}>
+   <Script
+    src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=a8693c98-e820-425a-948f-17952a243766"
+    type="text/javascript"
+    onLoad={(e) => {
+     ymaps.ready(init);
+    }}></Script>
+
+   <div
+    id={'map-container'}
+    style={{
+     height: '100%',
+     width: '100%',
+     borderRadius: '4px',
+    }}></div>
+  </div>
  );
 }

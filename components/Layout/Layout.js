@@ -75,14 +75,7 @@ export default function Layout({ children }) {
        icon={<MailOutlined />}>
        Мероприятия
       </Menu.Item>
-      <Menu.Item
-       onClick={() => {
-        router.push('/account/points');
-       }}
-       key={'points'}
-       icon={<MailOutlined />}>
-       Мои бонусы
-      </Menu.Item>
+
       <Menu.Item
        onClick={() => {
         router.push('/account/friends');
@@ -98,6 +91,22 @@ export default function Layout({ children }) {
        key={'shop'}
        icon={<ShoppingCartOutlined />}>
        Лавка волонтера
+      </Menu.Item>
+      <Menu.Item
+       onClick={() => {
+        router.push('/account/points');
+       }}
+       key={'points'}
+       icon={<MailOutlined />}>
+       Мои бонусы
+      </Menu.Item>
+      <Menu.Item
+       onClick={() => {
+        router.push('/account/learning');
+       }}
+       key={'points'}
+       icon={<MailOutlined />}>
+       Обучение
       </Menu.Item>
      </Menu>
     </div>

@@ -12,7 +12,7 @@ import {
 } from 'antd';
 import { useRouter } from 'next/router';
 import styles from '../../../styles/events.module.scss';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { district, tags } from '../../../utils/data';
 import Link from 'next/link';
@@ -44,6 +44,17 @@ function ExchangeRates() {
 export default function Events() {
  const router = useRouter();
  const [viewMap, setMapVisible] = useState(false);
+ const [state, editState] = useState({});
+ const setState = (e) => {
+  editState((prevState) => ({ ...prevState, ...e }));
+ };
+
+ useEffect(() => {
+  if (router.query.search) {
+   setState({ name: router.query.search });
+   document.getElementById('name-input').focus();
+  }
+ }, []);
 
  const test = [
   {
@@ -120,7 +131,13 @@ export default function Events() {
      {/*<ExchangeRates />*/}
      <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
       <div>
-       <Input placeholder={'Поиск'}></Input>
+       <Input
+        id={'name-input'}
+        value={state.name}
+        onChange={(e) => {
+         setState({ name: e.target.value });
+        }}
+        placeholder={'Поиск'}></Input>
       </div>
       <div>
        <Button type={'primary'}>Поиск</Button>

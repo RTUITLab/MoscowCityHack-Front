@@ -1,6 +1,7 @@
 import styles from './Header.module.scss';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../contexts/MainContext';
+import { useEffect, useState } from 'react';
 import { Button, Input, Popover } from 'antd';
 import { ArrowDownOutlined } from '@ant-design/icons';
 
@@ -9,6 +10,11 @@ const { Search } = Input;
 export default function Header({ disableButtons }) {
  const [state, setState] = useAuth();
  const router = useRouter();
+ const [search, setSearchString] = useState('');
+
+ useEffect(() => {
+  setSearchString('');
+ }, [router.pathname]);
 
  return (
   <header className={styles.parent}>
@@ -23,13 +29,26 @@ export default function Header({ disableButtons }) {
        }}>
        <span style={{ fontSize: '1.2em', letterSpacing: '1px' }}>Главная</span>
       </Button>
-      <Search
-       enterButton
-       placeholder="Найти доброе дело"
-       allowClear
-       onSearch={() => {}}
-       style={{ width: 250, color: 'black' }}
-      />
+      {router.pathname !== '/account/events' ? (
+       <Input
+        value={search}
+        onChange={(e) => {
+         setSearchString(e.target.value);
+         let current = e.target.value;
+         if (e.target.value) {
+          setTimeout(() => {
+           if (current === e.target.value) {
+            router.push('/account/events?search=' + e.target.value);
+           }
+          }, 500);
+         }
+        }}
+        enterButton
+        placeholder="Найти доброе дело"
+        allowClear
+        style={{ width: 250, color: 'black' }}
+       />
+      ) : null}
      </div>
      <Popover
       title={state.user.name}

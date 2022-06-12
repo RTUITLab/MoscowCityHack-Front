@@ -22,7 +22,7 @@ const { Option } = Select;
 const { TextArea } = Input;
 
 export default function CreateEventsAll() {
- const [part, setPart] = useState(1);
+ const [part, setPart] = useState(0);
 
  const [tags, setTags] = useState(tagsData);
 
