@@ -1,5 +1,5 @@
 import Header from '../Header/Header';
-import { Button, Menu, Modal, PageHeader, Popover } from 'antd';
+import { Button, Divider, Menu, Modal, PageHeader, Popover } from 'antd';
 import styles from './Layout.module.scss';
 import {
  HeartFilled,
@@ -52,6 +52,9 @@ export default function Layout({ children }) {
   } else if (currentHref === '/account/learning') {
    setActiveTab('learning');
    setTitle('Центр обучения');
+  } else if (currentHref === '/account/settings') {
+   setActiveTab('profile');
+   setTitle('Редактирование профиля');
   } else if (currentHref === '/account/events/[eventId]') {
    setActiveTab('events');
    setTitle(
@@ -210,7 +213,6 @@ const ShopHeader = () => {
      <Button
       type="text"
       style={{
-       fontSize: '0.9em',
        display: 'flex',
        alignItems: 'center',
       }}>
@@ -239,13 +241,12 @@ const ShopHeader = () => {
       );
      }}
      placement="bottomLeft">
-     <Button
-      type="text"
-      style={{ fontSize: '0.9em', display: 'flex', alignItems: 'center' }}>
+     <Button type="text" style={{ display: 'flex', alignItems: 'center' }}>
       <ShoppingFilled />
       Корзина
      </Button>
     </Popover>
+    <Divider style={{ marginRight: '25px' }} type="vertical" />
     <Badge count={state.user.points} />
    </div>
   </div>

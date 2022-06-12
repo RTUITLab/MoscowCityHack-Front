@@ -1,10 +1,10 @@
 import {
  Button,
+ DatePicker,
  Input,
  Radio,
  Select,
  Slider,
- DatePicker,
  TimePicker,
 } from 'antd';
 import styles from '../../../styles/events-create.module.scss';
@@ -125,7 +125,7 @@ export default function CreateEvents({ createdBy }) {
     <section className={styles.mainSection}>
      <section>
       <div style={{ display: 'grid', justifyContent: 'flex-start' }}>
-       <h4>Обложка</h4>
+       <h3>Обложка</h3>
        <div className={styles.cover}>
         <img
          src="https://avatars.mds.yandex.net/i?id=a4a6ad4d99a96c4f865ee6db4e5409b6-4303509-images-thumbs&n=13"
