@@ -12,8 +12,9 @@ import { useAuth } from '../../../contexts/MainContext';
 export default function EventPage() {
  const [state, setState] = useAuth();
  const router = useRouter();
- const [project, setProject] = useState('empty');
+ let project;
  const { eventId } = router.query;
+
  function getData(id) {
   project = state.user.eventsParticipate[id];
  }
