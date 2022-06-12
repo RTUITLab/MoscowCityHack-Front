@@ -27,7 +27,6 @@ function RequireAuth({ children }) {
  const isLoggedIn = useAuth()[0].isLoggedIn;
  const router = useRouter();
  if (
-  false &&
   !isLoggedIn &&
   router.pathname !== '/' &&
   router.pathname !== '/login' &&
