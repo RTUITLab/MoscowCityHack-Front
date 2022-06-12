@@ -17,7 +17,7 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import { district, tags } from '../../../utils/data';
 import Link from 'next/link';
 import Map from '../../../components/map';
-import { test as AAA } from '../../../services';
+import { getData } from '../../../services';
 
 const { Option } = Select;
 
@@ -34,7 +34,6 @@ export default function Events() {
    setState({ name: router.query.search });
    document.getElementById('name-input').focus();
   }
-  AAA();
  }, []);
 
  const test = [

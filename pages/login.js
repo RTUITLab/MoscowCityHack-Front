@@ -16,7 +16,6 @@ export default function LoginPage() {
  const router = useRouter();
 
  function onFinish(form, type) {
-  console.log(form, type);
   if (type == 'login') {
    setLoading(true);
 
@@ -34,9 +33,13 @@ export default function LoginPage() {
    <div className={styles.card}>
     <Tabs disabled={loading} defaultActiveKey="2">
      <TabPane tab="Авторизация" key="1">
+      {
+       //Login form
+      }
       <Form
+       colon={false}
        disabled={loading}
-       name="basic"
+       name="loginForm"
        labelCol={{
         span: 6,
        }}
@@ -79,45 +82,30 @@ export default function LoginPage() {
 
        <Divider />
 
-       <Form.Item
-        wrapperCol={{
-         offset: 9,
-         span: 15,
-        }}>
-        <Button type="primary" size="large" htmlType="submit">
+       <Form.Item noStyle={true}>
+        <Button
+         style={{
+          display: 'block',
+          margin: '0 auto',
+         }}
+         type="primary"
+         size="large"
+         htmlType="submit">
          Войти
         </Button>
        </Form.Item>
       </Form>
-      {/*
-      <div className={styles.page}>
-       <Input disabled={loading} placeholder={'Логин'} size={'large'}></Input>
-       <Input.Password
-        placeholder={'Пароль'}
-        size={'large'}
-        disabled={loading}
-        iconRender={(visible) =>
-         visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-        }
-       />
-       <Divider />
-       <Button
-        loading={loading}
-        onClick={() => {
-         handleClick('login');
-        }}
-        type={'primary'}>
-        Войти
-       </Button>
-      </div>
-	*/}
      </TabPane>
      <TabPane tab="Регистрация" key="2">
+      {
+       //Register form
+      }
       <Form
+       colon={false}
        labelWrap
        labelAlign="left"
        disabled={loading}
-       name="basic"
+       name="registerForm"
        labelCol={{
         span: 6,
        }}
@@ -125,19 +113,18 @@ export default function LoginPage() {
         span: 17,
        }}
        initialValues={{
-        remember: true,
+        accountType: 'person',
        }}
        onFinish={(form) => onFinish(form, 'register')}
        autoComplete="on">
        <Form.Item
-        name="accountTypeVal"
+        name="accountType"
         wrapperCol={{
-         offset: 4,
-         span: 16,
+         offset: 0,
+         span: 24,
         }}>
         <Select
          size={'large'}
-         defaultValue="person"
          onChange={(e) => {
           setAccountType(e);
          }}>
@@ -157,7 +144,7 @@ export default function LoginPage() {
           ]}
           label="Имя"
           name="name">
-          <Input disabled={loading} size={'large'}></Input>
+          <Input size={'large'}></Input>
          </Form.Item>
          <Form.Item
           rules={[
@@ -167,7 +154,7 @@ export default function LoginPage() {
            },
           ]}
           label="Фамилия"
-          name="family">
+          name="surname">
           <Input size={'large'}></Input>
          </Form.Item>
          <Form.Item
@@ -237,69 +224,20 @@ export default function LoginPage() {
 
        <Divider />
 
-       <Form.Item
-        wrapperCol={{
-         offset: 6,
-         span: 18,
-        }}>
+       <Form.Item noStyle={true}>
         <Button
          loading={loading}
          htmlType="submit"
          type={'primary'}
-         size="large">
+         size="large"
+         style={{
+          display: 'block',
+          margin: '0 auto',
+         }}>
          Зарегистрироваться
         </Button>
        </Form.Item>
       </Form>
-      {/*
-      <div className={styles.page}>
-       <Select
-        disabled={loading}
-        size={'large'}
-        defaultValue="person"
-        onChange={(e) => {
-         setAccountType(e);
-        }}>
-        <Option value="person">Физическое лицо</Option>
-        <Option value="company">Юридическое лицо</Option>
-       </Select>
-       {accountType === 'person' ? (
-        <>
-         <Input disabled={loading} placeholder={'Имя'} size={'large'}></Input>
-         <Input
-          disabled={loading}
-          placeholder={'Фамилия'}
-          size={'large'}></Input>
-         <Input
-          disabled={loading}
-          type={'date'}
-          placeholder={'Дата рождения'}
-          size={'large'}></Input>
-        </>
-       ) : (
-        <>
-         <Input placeholder={'Название компании'} size={'large'}></Input>
-        </>
-       )}
-       <Input disabled={loading} placeholder={'Логин'} size={'large'}></Input>
-
-       <Input.Password
-        placeholder={'Пароль'}
-        size={'large'}
-        disabled={loading}
-        iconRender={(visible) =>
-         visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-        }
-       />
-       <Divider />
-       <Button
-        loading={loading}
-        onClick={() => handleClick('reg')}
-        type={'primary'}>
-        Зарегистрироваться
-       </Button>
-      </div>
-	  */}
      </TabPane>
     </Tabs>
    </div>

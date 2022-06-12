@@ -1,6 +1,8 @@
-export function getData() {
- var query = `query GetRates {
-   getUser(id: 23) {
+export function getData(queryProps, data) {
+ let query;
+ if (queryProps === 'getUser')
+  query = `query GetRates {
+   getUser(id: ${data.id}) {
     id
    }
   }`;
@@ -22,13 +24,14 @@ export function getData() {
 export function sendData(mutationProps, data) {
  let mutation;
  if (mutationProps === 'register') {
-  mutation = `mutation {
+  if (data.accounType === 'company')
+   mutation = `mutation {
     createCompany(company: 
       {
-      name: "companyLOH", 
+      name: ${data.name}, 
       user: {
-        login: "comp", 
-        password: "comp", 
+        login: ${data.login}, 
+        password: ${data.password}, 
         role: {
           name: "ROLE_COMPANY"
         }
@@ -38,15 +41,15 @@ export function sendData(mutationProps, data) {
     }
   }
   `;
-  /* 
-  mutation{
+  else if (data.accounType === 'person')
+   mutation = `mutation{
     createVolunteer(volunteer: {
-      name: "mod1",
-      surname: "mod1",
-      birthDate: "2022-01-01",
+      name: ${data.name},
+      surname: ${data.surname},
+      birthDate: ${data.birthdate.format('YYYY-MM-DD')},
       user: {
-        login: "vol1",
-        password: "vol1",
+        login: ${data.login},
+        password: ${data.password},
         role: {
           name: "ROLE_VOLUNTEER"
         }
@@ -54,7 +57,8 @@ export function sendData(mutationProps, data) {
     }) {
       id,
       name
-    } */
+    }
+   } `;
  }
  fetch(process.env.NEXT_PUBLIC_API_HOST, {
   method: 'POST',
@@ -64,7 +68,6 @@ export function sendData(mutationProps, data) {
   },
   body: JSON.stringify({
    mutation,
-   variables: {},
   }),
  })
   .then((r) => r.json())
