@@ -55,6 +55,9 @@ export default function Layout({ children }) {
   } else if (currentHref === '/account/settings') {
    setActiveTab('profile');
    setTitle('Редактирование профиля');
+  } else if (currentHref === '/account/events/requests') {
+   setActiveTab('events');
+   setTitle('Заявки на публикацию');
   } else if (currentHref === '/account/events/[eventId]') {
    setActiveTab('events');
    setTitle(
