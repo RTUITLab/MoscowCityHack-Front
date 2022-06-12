@@ -1,9 +1,11 @@
 export function test() {
- var query = `query GetRates {
+ const query = `
+	query GOVNO {
    getUsers {
     id
    }
-  }`;
+  }
+  `;
 
  fetch(process.env.NEXT_PUBLIC_API_HOST, {
   method: 'POST',

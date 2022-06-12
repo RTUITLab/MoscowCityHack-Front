@@ -5,9 +5,12 @@ import {
  HeartFilled,
  HeartOutlined,
  MailOutlined,
+ ReadOutlined,
  ShoppingCartOutlined,
  ShoppingFilled,
+ UsergroupDeleteOutlined,
  UserOutlined,
+ WalletOutlined,
 } from '@ant-design/icons';
 
 import { useEffect, useState } from 'react';
@@ -40,6 +43,15 @@ export default function Layout({ children }) {
   } else if (currentHref === '/account/shop') {
    setActiveTab('shop');
    setTitle(<ShopHeader />);
+  } else if (currentHref === '/account/friends') {
+   setActiveTab('friends');
+   setTitle('Друзья');
+  } else if (currentHref === '/account/bonuses') {
+   setActiveTab('bonuses');
+   setTitle('Бонусы');
+  } else if (currentHref === '/account/learning') {
+   setActiveTab('learning');
+   setTitle('Центр обучения');
   } else if (currentHref === '/account/events/[eventId]') {
    setActiveTab('events');
    setTitle(
@@ -81,7 +93,7 @@ export default function Layout({ children }) {
         router.push('/account/friends');
        }}
        key={'friends'}
-       icon={<ShoppingCartOutlined />}>
+       icon={<UsergroupDeleteOutlined />}>
        Друзья
       </Menu.Item>
       <Menu.Item
@@ -94,18 +106,18 @@ export default function Layout({ children }) {
       </Menu.Item>
       <Menu.Item
        onClick={() => {
-        router.push('/account/points');
+        router.push('/account/bonuses');
        }}
-       key={'points'}
-       icon={<MailOutlined />}>
+       key={'bonuses'}
+       icon={<WalletOutlined />}>
        Мои бонусы
       </Menu.Item>
       <Menu.Item
        onClick={() => {
         router.push('/account/learning');
        }}
-       key={'points'}
-       icon={<MailOutlined />}>
+       key={'learning'}
+       icon={<ReadOutlined />}>
        Обучение
       </Menu.Item>
      </Menu>
