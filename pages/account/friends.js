@@ -23,7 +23,7 @@ export default function Friends() {
     <h3 style={{ color: 'gray' }}>Страница пока не реализована</h3>
     <Divider />
     <span style={{ textAlign: 'center' }}>
-     В будущем здесь планировалось добавить вкладку со списком друзей.
+     В будущем здесь планируется добавить вкладку со списком друзей.
     </span>
    </div>
   </div>

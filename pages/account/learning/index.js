@@ -11,7 +11,6 @@ export default function LearningPage() {
       desc: 'Вы научитесь оказывать первую помощь на мероприятиях',
       count: 7,
       time: 2,
-      link: 'Курс волонтёра-медика',
      }}
      style={{ backgroundColor: '#f14f45' }}
     />
