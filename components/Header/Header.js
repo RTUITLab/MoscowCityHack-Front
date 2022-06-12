@@ -14,7 +14,7 @@ export default function Header({ disableButtons }) {
  return (
   <header className={styles.parent}>
    {!disableButtons ? (
-    <>
+    <div className={styles.buttonContainer}>
      <div style={{ display: 'flex', gap: '50px' }}>
       <Button
        type="text"
@@ -22,7 +22,7 @@ export default function Header({ disableButtons }) {
        onClick={() => {
         router.push('/');
        }}>
-       <span style={{ fontSize: '1.4em', letterSpacing: '1px' }}>Главная</span>
+       <span style={{ fontSize: '1.2em', letterSpacing: '1px' }}>Главная</span>
       </Button>
       <Search
        enterButton
@@ -51,7 +51,7 @@ export default function Header({ disableButtons }) {
      </Popover>
      {/*<span>Топ компаний</span>*/}
      {/*<span>Топ организаций</span>*/}
-    </>
+    </div>
    ) : null}
   </header>
  );
