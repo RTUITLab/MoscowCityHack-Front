@@ -34,6 +34,7 @@ export class TokenManager {
 
   if (params) {
    if (params.new) return this.auth(login, password);
+   if (params.new === false) return ACCESS_TOKEN || undefined;
   }
 
   if (ACCESS_TOKEN) {

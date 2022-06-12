@@ -75,7 +75,7 @@ export default function LoginPage() {
  return (
   <div className={styles.container}>
    <div className={styles.card}>
-    <Tabs disabled={loading} defaultActiveKey="2">
+    <Tabs disabled={loading} defaultActiveKey="1">
      <TabPane tab="Авторизация" key="1">
       {
        //Login form
