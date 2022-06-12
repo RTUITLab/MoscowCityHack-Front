@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Script from 'next/script';
+import { Modal } from 'antd';
 
 export default function Map() {
  let k = 0;
+ const [showPopout, setShowPopout] = useState(false);
 
  useEffect(() => {
   if (k == 0) {
@@ -49,7 +51,11 @@ export default function Map() {
     onLoad={(e) => {
      ymaps.ready(init);
     }}></Script>
-
+   <Modal title="Basic Modal" visible={false}>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+   </Modal>
    <div
     id={'map-container'}
     style={{
