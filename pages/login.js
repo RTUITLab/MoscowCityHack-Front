@@ -52,11 +52,14 @@ export default function LoginPage() {
    setLoading(true);
    sendData(type, form)
     .then(async (e) => {
-     if (e.data.createVolunteer.id) {
+     if (
+      e.data?.registerAuthorizeVol?.token !== undefined ||
+      e.data?.registerAuthorizeCom?.token !== undefined
+     ) {
       const token = await tokenManager.getToken(form.login, form.password, {
        new: true,
       });
-
+      console.log(token);
       if (token) {
        setState({ isLoggedIn: true });
        router.push('/account');

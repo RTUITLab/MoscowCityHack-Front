@@ -31,7 +31,6 @@ export class TokenManager {
 
  getToken(login, password, params) {
   const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
-
   if (params) {
    if (params.new) return this.auth(login, password);
    if (params.new === false) return ACCESS_TOKEN || undefined;

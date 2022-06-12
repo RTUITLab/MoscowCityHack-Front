@@ -14,9 +14,7 @@ export function useUser() {
  return [
   state.user,
   (e) => {
-   let user = JSON.parse(JSON.stringify(state.user));
-   user = { ...user, ...e };
-   setState({ user });
+   setState({ user: { ...state.user, ...e } });
   },
  ];
 }

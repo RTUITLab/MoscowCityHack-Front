@@ -1,7 +1,6 @@
 import styles from '../../styles/form-create.module.scss';
 import {
  Button,
- Checkbox,
  DatePicker,
  Divider,
  Input,
@@ -129,12 +128,16 @@ export default function CreateEventsAll() {
    </section>
    <section>
     <h3>Тип проведения</h3>
-    <Checkbox.Group style={{ width: '100%' }}>
-     <Space direction="vertical">
-      <Checkbox value="online">Онлайн</Checkbox>
-      <Checkbox value="offline">Оффлайн</Checkbox>
+    <Radio.Group style={{ width: '100%' }}>
+     <Space
+      direction="vertical"
+      onChange={(e) => {
+       setState({ online: e.target.value === 'online' });
+      }}>
+      <Radio value="online">Онлайн</Radio>
+      <Radio value="offline">Оффлайн</Radio>
      </Space>
-    </Checkbox.Group>
+    </Radio.Group>
    </section>
    <section style={{ maxWidth: '320px' }}>
     <h3>Возрастная группа</h3>
@@ -150,12 +153,19 @@ export default function CreateEventsAll() {
    </section>
    <section>
     <h3>Адрес</h3>
-    <Input size={'large'}></Input>
+    <Input
+     size={'large'}
+     onChange={(e) => {
+      setState({ address: e.target.value });
+     }}></Input>
    </section>
    <section style={{ maxWidth: '350px' }}>
     <h3>Район Москвы</h3>
     <Select
      placeholder={'Район Москвы'}
+     onChange={(e) => {
+      setState({ region: e });
+     }}
      size={'large'}
      style={{ width: '100%' }}>
      {district.map((e) => {
@@ -171,25 +181,44 @@ export default function CreateEventsAll() {
     style={{ display: 'flex', gap: '15px', width: '100%', maxWidth: '900px' }}>
     <div>
      <h4>Дата</h4>
-     <DatePicker format={'DD/MM/YYYY'}></DatePicker>
+     <DatePicker
+      onChange={(e) => {
+       setState({ date: e._d.getTime() });
+      }}
+      format={'DD/MM/YYYY'}></DatePicker>
     </div>
     <div>
      <h4>Время начала</h4>
-     <TimePicker format={'HH:mm'}></TimePicker>
+     <TimePicker
+      onChange={(e) => {
+       setState({ dateStart: state.date + e._d.getTime() });
+      }}
+      format={'HH:mm'}></TimePicker>
     </div>
     <div>
      <h4>Время окончания</h4>
-     <TimePicker format={'HH:mm'}></TimePicker>
+     <TimePicker
+      onChange={(e) => {
+       setState({ dateEnd: state.date + e._d.getTime() });
+      }}
+      format={'HH:mm'}></TimePicker>
     </div>
    </section>
    <section>
     <h3>Описание задач</h3>
     <TextArea
+     onChange={(e) => {
+      setState({ taskDescription: e.target.value });
+     }}
      placeholer={'Опишите, какие задачи предстоит решать волонтеру'}></TextArea>
    </section>
    <section>
     <h3>Описание требований</h3>
-    <TextArea placeholer={'Опишите требования к вашей задаче'}></TextArea>
+    <TextArea
+     onChange={(e) => {
+      setState({ taskDescription: e.target.value });
+     }}
+     placeholer={'Опишите требования к вашей задаче'}></TextArea>
    </section>
    <section>
     <h3>Описание опций</h3>

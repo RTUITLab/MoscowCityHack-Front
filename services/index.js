@@ -30,7 +30,7 @@ export function sendData(mutationProps, data) {
  if (mutationProps === 'register') {
   if (data.accountType === 'company')
    mutation = `mutation {
-    createCompany(company: 
+    registerAuthorizeCom(company: 
       {
       name: "${data.name}", 
       user: {
@@ -41,13 +41,13 @@ export function sendData(mutationProps, data) {
         }
       }
       }) {
-      id
+      token
     }
   }
   `;
   else if (data.accountType === 'person')
    mutation = `mutation{
-    createVolunteer(volunteer: {
+    registerAuthorizeVol(volunteer: {
       name: "${data.name}",
       surname: "${data.surname}",
       birthDate: ${new Date(data.birthdate).getTime()},
@@ -59,8 +59,7 @@ export function sendData(mutationProps, data) {
         }
       }
     }) {
-      id,
-      name
+      token
     }
    } `;
  }

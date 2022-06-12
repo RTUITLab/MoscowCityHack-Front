@@ -25,13 +25,7 @@ const Index = () => {
  const [user, setU] = useUser();
 
  useEffect(() => {
-  createQuery(`
-   query{
-			getVolunteerByToken{id}
-		}
-  `).then((r) => {
-   console.log(r);
-  });
+  initUserData(setU, setState);
  }, []);
 
  const columns = [
@@ -57,40 +51,18 @@ const Index = () => {
    dataIndex: 'timeEnd',
    key: 'Дата конца',
   },
-  {
-   title: 'Баллы',
-   dataIndex: 'points',
-   key: 'Баллы',
-   render: (points) => <Badge count={points} />,
-  },
  ];
 
- const data = [
-  {
-   key: '1',
-   type: 'Помощь инвалидам',
-   time: 4,
-   timeStart: '13.01.2022',
-   timeEnd: '20.02.2022',
-   points: 100,
-  },
-  {
-   key: '2',
-   type: 'Помощь инвалидам',
-   time: 4,
-   timeStart: '13.01.2022',
-   timeEnd: '20.02.2022',
-   points: 200,
-  },
-  {
-   key: '3',
-   type: 'Помощь инвалидам',
-   time: 4,
-   timeStart: '13.01.2022',
-   timeEnd: '20.02.2022',
-   points: 350,
-  },
- ];
+ const data = (user.events || []).map((e, i) => {
+  return {
+   key: i.toString(),
+   type: e.title,
+   time: Math.ceil((e.dateEnd - e.dateStart) / 60),
+   timeStart: new Date(e.dateStart).toLocaleString('ru'),
+   timeEnd: new Date(e.dateEnd).toLocaleString('ru'),
+  };
+ });
+
  return (
   <div className={styles.profileWrapper}>
    <div>
@@ -99,7 +71,7 @@ const Index = () => {
      cover={
       <>
        <div className={styles.cardTitle}>
-        <h3 className={styles.name}>{user.name}</h3>
+        <h3 className={styles.name}>{user.name + ' ' + user?.surname}</h3>
        </div>
        <Image alt="Ваше фото" src={user.avatar} />
       </>
@@ -126,7 +98,9 @@ const Index = () => {
        <div style={{ display: 'flex', justifyContent: 'center' }}>
         <div style={{ display: 'grid', gap: '15px', justifyContent: 'center' }}>
          <div>
-          <Badge type={'level'} count={user?.exp?.toString()[0]}></Badge>
+          <Badge
+           type={'level'}
+           count={Math.floor(user?.exp / 100)?.toString()}></Badge>
          </div>
          <div className={styles.status}>
           <Progress
@@ -231,5 +205,101 @@ const Index = () => {
   </div>
  );
 };
+
+export async function initUserData(setU, setState) {
+ const ROLE = localStorage.getItem('ROLE');
+ const DATA = (
+  await createQuery(`
+    {
+    getAdvancementByToken {
+      level
+      points
+      exp
+    }
+  }
+    `)
+ ).data.getAdvancementByToken;
+
+ const EVENTS = (
+  await createQuery(`
+  {
+  getEventsByToken {
+   ${EVENTS_PARAMS}
+  }
+}
+  `)
+ ).data.getEventsByToken;
+
+ const ALL_EVENTS = (
+  await createQuery(`
+  {
+  getEventsByToken {
+    ${EVENTS_PARAMS}
+  }
+}
+  `)
+ ).data.getEventsByToken;
+
+ setState({ events: ALL_EVENTS });
+
+ if (ROLE === 'ROLE_VOLUNTEER') {
+  createQuery(`
+    query{
+     getVolunteerByToken{id, name,surname,birthDate,user{id}}
+   }
+  `).then((r) => {
+   const USER = r.data.getVolunteerByToken;
+   setU({
+    id: USER.id,
+    name: USER.name,
+    surname: USER.surname,
+    birthdate: USER.birthDate,
+    userId: USER.user.id,
+    exp: DATA?.exp || 0,
+    points: DATA?.points || 0,
+    level: DATA?.level || 0,
+    events: EVENTS,
+   });
+  });
+ } else {
+ }
+}
+
+const EVENTS_PARAMS = `
+    id
+    title
+    region
+    address
+    dateStart
+    dateEnd
+    taskDescription
+    requirements
+    facilities
+    materials
+    photoUrl
+    email
+    currentAmount
+    maxAmount
+    online
+    participants {
+      id
+      role {
+        name
+      }
+    }
+    owner {
+      id
+      role {
+        name
+      }
+    }
+    directions {
+      name
+    }
+    tags {
+      name
+    }
+    published
+`;
 
 export default Index;
