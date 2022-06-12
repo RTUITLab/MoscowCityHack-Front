@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/MainContext';
 import { useEffect, useState } from 'react';
 import { Button, Input, Popover } from 'antd';
 import { ArrowDownOutlined } from '@ant-design/icons';
+import { TokenManager } from '../../services/TokenManager';
 
 export default function Header({ disableButtons }) {
  const [state, setState] = useAuth();
@@ -54,7 +55,11 @@ export default function Header({ disableButtons }) {
        return (
         <div style={{ display: 'grid', gap: '15px' }}>
          <Button>Настройки</Button>
-         <Button onClick={() => setState({ isLoggedIn: false, user: {} })}>
+         <Button
+          onClick={() => {
+           setState({ isLoggedIn: false, user: {} });
+           new TokenManager().deleteToken();
+          }}>
           Выйти
          </Button>
         </div>

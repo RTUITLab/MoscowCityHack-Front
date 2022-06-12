@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import { events } from '../utils/data';
 
@@ -7,6 +7,18 @@ const context = React.createContext({});
 function useAuth() {
  //кастомный хук для удобства
  return React.useContext(context);
+}
+
+export function useUser() {
+ const [state, setState] = useContext(context);
+ return [
+  state.user,
+  (e) => {
+   let user = JSON.parse(JSON.stringify(state.user));
+   user = { ...user, ...e };
+   setState({ user });
+  },
+ ];
 }
 
 function ContextProvider({ children }) {
@@ -28,9 +40,9 @@ function RequireAuth({ children }) {
  const router = useRouter();
  if (
   !isLoggedIn &&
-  router.pathname !== '/' &&
-  router.pathname !== '/login' &&
-  router.pathname !== '/form/create'
+  ['/', '/login', '/form/create', '/account/export'].indexOf(
+   router.pathname
+  ) === -1
  ) {
   setTimeout(() => router.push('/login'), 0); //вместо этого можно добавить страницу "вы не авторизованы" с кнопкой возврата на Login
   return <></>;
@@ -42,7 +54,7 @@ function RequireAuth({ children }) {
 export { useAuth, ContextProvider };
 
 const testState = {
- isLoggedIn: true,
+ isLoggedIn: false,
  type: 'person', // moderator/company
  shop: {
   items: [
@@ -93,8 +105,6 @@ const testState = {
   name: 'Павел',
   surname: 'Сыроедов',
   birthdate: 4121234,
-  /*login: '',
-  password: '',*/
   avatar:
    'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
   exp: 370,

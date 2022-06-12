@@ -1,4 +1,6 @@
-export function getData(queryProps, data) {
+import { useEffect, useState } from 'react';
+
+export function getUsers(queryProps, data) {
  let query;
  if (queryProps === 'getUser')
   query = `query GetRates {
@@ -21,17 +23,18 @@ export function getData(queryProps, data) {
   .then((r) => r.json())
   .then((data) => console.log('data returned:', data));
 }
+
 export function sendData(mutationProps, data) {
  let mutation;
  if (mutationProps === 'register') {
-  if (data.accounType === 'company')
+  if (data.accountType === 'company')
    mutation = `mutation {
     createCompany(company: 
       {
-      name: ${data.name}, 
+      name: "${data.name}", 
       user: {
-        login: ${data.login}, 
-        password: ${data.password}, 
+        login: "${data.login}", 
+        password: "${data.password}", 
         role: {
           name: "ROLE_COMPANY"
         }
@@ -41,15 +44,15 @@ export function sendData(mutationProps, data) {
     }
   }
   `;
-  else if (data.accounType === 'person')
+  else if (data.accountType === 'person')
    mutation = `mutation{
     createVolunteer(volunteer: {
-      name: ${data.name},
-      surname: ${data.surname},
-      birthDate: ${data.birthdate.format('YYYY-MM-DD')},
+      name: "${data.name}",
+      surname: "${data.surname}",
+      birthDate: ${new Date(data.birthdate).getTime()},
       user: {
-        login: ${data.login},
-        password: ${data.password},
+        login: "${data.login}",
+        password: "${data.password}",
         role: {
           name: "ROLE_VOLUNTEER"
         }
@@ -60,16 +63,89 @@ export function sendData(mutationProps, data) {
     }
    } `;
  }
- fetch(process.env.NEXT_PUBLIC_API_HOST, {
+ return new Promise((resolve) => {
+  fetch(process.env.NEXT_PUBLIC_API_HOST, {
+   method: 'POST',
+   headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+   },
+   body: JSON.stringify({
+    query: mutation,
+   }),
+  })
+   .then((r) => r.json())
+   .then((data) => {
+    resolve(data);
+   });
+ });
+}
+
+export function createQuery(query) {
+ return fetch(process.env.NEXT_PUBLIC_API_HOST, {
   method: 'POST',
   headers: {
    'Content-Type': 'application/json',
    Accept: 'application/json',
   },
   body: JSON.stringify({
-   mutation,
+   query: query,
   }),
  })
   .then((r) => r.json())
-  .then((data) => console.log('data returned:', data));
+  .then((data) => {
+   return data;
+  })
+  .catch((e) => {
+   return undefined;
+  });
+}
+
+export function useQuery(query) {
+ const [state, editState] = useState({
+  loading: true,
+  error: undefined,
+  data: undefined,
+ });
+
+ let callbackFunc = undefined;
+
+ const setState = (e) => {
+  editState((prevState) => ({ ...prevState, ...e }));
+ };
+
+ useEffect(() => {
+  fetch(process.env.NEXT_PUBLIC_API_HOST, {
+   method: 'POST',
+   headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+   },
+   body: JSON.stringify({
+    query: query,
+   }),
+  })
+   .then((r) => r.json())
+   .then((data) => {
+    setState({ data, loading: false });
+    if (callbackFunc) {
+     callbackFunc();
+    }
+   })
+   .catch((e) => {
+    setState({ error: e, loading: false });
+    if (callbackFunc) {
+     callbackFunc();
+    }
+   });
+ }, []);
+
+ return {
+  error: state.error,
+  loading: state.loading,
+  data: state.data,
+  subscribe: (callback) => {
+   callbackFunc = callback;
+  },
+ };
 }

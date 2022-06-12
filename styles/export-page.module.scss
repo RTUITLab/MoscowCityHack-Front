@@ -6,6 +6,9 @@
 	padding: 30px;
 
 	.contentContainer {
+		max-width: 800px;
+		margin-left: 15px;
+
 		.header {
 			.table {
 				display: grid;
@@ -27,6 +30,7 @@
 		}
 
 		.footer {
+			margin-right: 15px;
 			display: flex;
 			justify-content: flex-end;
 

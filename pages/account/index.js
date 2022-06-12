@@ -3,6 +3,7 @@ import {
  Button,
  Card,
  Descriptions,
+ Divider,
  Image,
  Progress,
  Row,
@@ -13,18 +14,14 @@ import React from 'react';
 import Badge from '../../components/Badge/Badge';
 import styles from '../../styles/profile.module.scss';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../contexts/MainContext.js';
+import { useAuth, useUser } from '../../contexts/MainContext.js';
 
 const { Meta } = Card;
 
 const Index = () => {
  const router = useRouter();
  const [state, setState] = useAuth();
- const user = state.user;
-
- if (user.type === 'company') {
-  return;
- }
+ const [user, setU] = useUser();
 
  const columns = [
   {
@@ -171,6 +168,7 @@ const Index = () => {
       valueStyle={{ fontSize: '2em', textAlign: 'center' }}
      />
     </div>
+    <Divider />
     <Row
      justify="center"
      align="middle"
