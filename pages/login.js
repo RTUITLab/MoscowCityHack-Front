@@ -1,9 +1,9 @@
 import styles from '../styles/LoginPage.module.scss';
-import { Button, Divider, Input, Select, Tabs, Form, DatePicker } from 'antd';
+import { Button, DatePicker, Divider, Form, Input, Select, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/MainContext';
 import { useRouter } from 'next/router';
-import { EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { sendData } from '../services';
 
 const { TabPane } = Tabs;
@@ -15,7 +15,7 @@ export default function LoginPage() {
  const [loading, setLoading] = useState(false);
  const router = useRouter();
 
- function onFinish(form, type) {
+ async function onFinish(form, type) {
   if (type == 'login') {
    setLoading(true);
 
@@ -23,8 +23,15 @@ export default function LoginPage() {
    router.push('/account');
   } else if (type === 'register') {
    setLoading(true);
-   sendData(type, form);
-   router.push('/login');
+   sendData(type, form)
+    .then((e) => {
+     console.log(e.data.createCompany.id);
+     router.push('/account');
+    })
+    .catch((e) => {
+     setLoading(false);
+     setState({ isLoggedIn: true });
+    });
   }
  }
 
@@ -125,6 +132,7 @@ export default function LoginPage() {
         }}>
         <Select
          size={'large'}
+         style={{ width: 'calc(100% - 27px)' }}
          onChange={(e) => {
           setAccountType(e);
          }}>
@@ -165,11 +173,9 @@ export default function LoginPage() {
            },
           ]}
           name="birthdate"
-          label="Дата рождения"
-          wrapperCol={{
-           offset: 2,
-          }}>
+          label="Дата рождения">
           <DatePicker
+           style={{ width: '100%' }}
            placeholder={'Выбрать дату'}
            type={'date'}
            size={'large'}

@@ -3,6 +3,7 @@ import {
  Button,
  Card,
  Descriptions,
+ Divider,
  Image,
  Progress,
  Row,
@@ -171,6 +172,7 @@ const Index = () => {
       valueStyle={{ fontSize: '2em', textAlign: 'center' }}
      />
     </div>
+    <Divider />
     <Row
      justify="center"
      align="middle"
