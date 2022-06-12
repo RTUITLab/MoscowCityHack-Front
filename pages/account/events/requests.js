@@ -1,7 +1,7 @@
-export default function Requests(){
-	return(
-		<div>
-			ff
-		</div>
-	)
+export default function Requests() {
+ return (
+  <div>
+   <Card />
+  </div>
+ );
 }

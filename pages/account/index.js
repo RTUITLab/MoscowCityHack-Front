@@ -146,7 +146,7 @@ const Index = () => {
         alignItems: 'center',
        }}>
        <Badge />
-       <span style={{ fontSize: '2em' }}>26562</span>
+       <span style={{ fontSize: '2em' }}>{user.points}</span>
       </div>
      </div>
      <Statistic
