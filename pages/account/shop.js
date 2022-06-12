@@ -26,26 +26,26 @@ function ShopCard(props) {
  let heart = liked ? (
   <HeartFilled
    key="like"
-   className={styles.action}
+   style={{ fontSize: '1.4em' }}
    onClick={() => props.handleLike(id)}
   />
  ) : (
   <HeartOutlined
    key="like"
-   className={styles.action}
+   style={{ fontSize: '1.4em' }}
    onClick={() => props.handleLike(id)}
   />
  );
  let shoppingCart = inCart ? (
   <ShoppingFilled
    key="add"
-   className={styles.action}
+   style={{ fontSize: '1.4em' }}
    onClick={() => props.handleAddCart(id)}
   />
  ) : (
   <ShoppingOutlined
    key="add"
-   className={styles.action}
+   style={{ fontSize: '1.4em' }}
    onClick={() => props.handleAddCart(id)}
   />
  );
@@ -67,7 +67,9 @@ function ShopCard(props) {
     actions={[heart, shoppingCart]}>
     <Meta title={title} description={description} />
     <div className={styles.price}>
-     <div>Цена: {price}</div>
+     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      Цена: {price} <Badge />
+     </div>
     </div>
    </Card>
   </div>
