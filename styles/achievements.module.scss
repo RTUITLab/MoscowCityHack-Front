@@ -1,3 +1,27 @@
 .parentContainer {
-
+ display: flex;
+ justify-content: flex-start;
+ align-items: baseline;
+ flex-wrap: wrap;
+ width: 100%;
+ column-gap: 10%;
+ row-gap: 40px;
+ margin-top: -3%;
+ .achievement {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px; //отступ текста от картинки
+  width: min-content;
+  .description {
+   font-size: 1.3em;
+   font-weight: 600;
+   text-align: center;
+  }
+  transition: transform 0.3s;
+  &:hover {
+   transform: scale(1.15);
+   cursor: pointer;
+  }
+ }
 }
