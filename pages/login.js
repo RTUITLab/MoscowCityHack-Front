@@ -1,10 +1,20 @@
 import styles from '../styles/LoginPage.module.scss';
-import { Button, DatePicker, Divider, Form, Input, Select, Tabs } from 'antd';
-import React, { useState } from 'react';
+import {
+ Button,
+ DatePicker,
+ Divider,
+ Form,
+ Input,
+ message,
+ Select,
+ Tabs,
+} from 'antd';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/MainContext';
 import { useRouter } from 'next/router';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { sendData } from '../services';
+import { TokenManager } from '../services/TokenManager';
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -14,19 +24,46 @@ export default function LoginPage() {
  const [accountType, setAccountType] = useState('person');
  const [loading, setLoading] = useState(false);
  const router = useRouter();
+ const tokenManager = new TokenManager();
+
+ useEffect(() => {
+  if (tokenManager.getToken()) {
+   setState({ isLoggedIn: true });
+   router.push('/account');
+  }
+ }, []);
 
  async function onFinish(form, type) {
   if (type == 'login') {
    setLoading(true);
 
-   setState({ isLoggedIn: true });
-   router.push('/account');
+   const token = await tokenManager.getToken(form.login, form.password, {
+    new: true,
+   });
+
+   setLoading(false);
+   if (token) {
+    setState({ isLoggedIn: true });
+    router.push('/account');
+   } else {
+    message.error('Неправильный логин или пароль');
+   }
   } else if (type === 'register') {
    setLoading(true);
    sendData(type, form)
-    .then((e) => {
-     console.log(e.data.createCompany.id);
-     router.push('/account');
+    .then(async (e) => {
+     if (e.data.createVolunteer.id) {
+      setState({ isLoggedIn: true });
+      const token = await tokenManager.getToken(form.login, form.password, {
+       new: true,
+      });
+
+      if (token) {
+       router.push('/account');
+      } else {
+       message.error('Произошла ошибка');
+      }
+     }
     })
     .catch((e) => {
      setLoading(false);
@@ -60,7 +97,7 @@ export default function LoginPage() {
        autoComplete="on">
        <Form.Item
         label="Логин"
-        name="username"
+        name="login"
         rules={[
          {
           required: true,

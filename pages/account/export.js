@@ -132,21 +132,9 @@ export default function ExportEventsPage() {
  ];
 
  const download = () => {
-  // var html2pdf = require('html-to-pdf-js');
-  // var element = document.getElementById('element-to-print');
-  // const opt = {
-  //  filename: 'export.pdf',
-  //  margin: 6,
-  // };
-  //
-  // document.getElementById('button-container').style.display = 'none';
-  // html2pdf(element, opt)
-  //  .outputPdf()
-  //  .then((e) => {
-  //   setTimeout(() => {
-  //    window.close();
-  //   }, 250);
-  //  });
+  document.getElementById('button-container').style.display = 'none';
+  window.print();
+  document.getElementById('button-container').style.display = 'block';
  };
 
  return (

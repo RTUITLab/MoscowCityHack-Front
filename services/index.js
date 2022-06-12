@@ -49,7 +49,7 @@ export function sendData(mutationProps, data) {
     createVolunteer(volunteer: {
       name: "${data.name}",
       surname: "${data.surname}",
-      birthDate: ${data.birthdate.format('YYYY-MM-DD')},
+      birthDate: ${new Date(data.birthdate).getTime()},
       user: {
         login: "${data.login}",
         password: "${data.password}",
@@ -97,7 +97,7 @@ export function createQuery(query) {
    return data;
   })
   .catch((e) => {
-   return e;
+   return undefined;
   });
 }
 
