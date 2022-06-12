@@ -262,6 +262,24 @@ export async function initUserData(setU, setState) {
    });
   });
  } else {
+  createQuery(`
+    query{
+     getCompanyByToken{id, name,user{id}}
+   }
+  `).then((r) => {
+   const USER = r.data.getCompanyByToken;
+   setU({
+    id: USER.id,
+    name: USER.name,
+    surname: '',
+    birthdate: undefined,
+    userId: USER.user.id,
+    exp: DATA?.exp || 0,
+    points: DATA?.points || 0,
+    level: DATA?.level || 0,
+    events: EVENTS,
+   });
+  });
  }
 }
 

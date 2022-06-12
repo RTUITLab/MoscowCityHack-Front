@@ -43,6 +43,12 @@ export default function CreateEventsAll() {
   } else {
   }
  };
+ const validateButton2 = () => {
+  if (part === 0) {
+   return !(Object.keys(state).length >= 4);
+  } else {
+  }
+ };
 
  const firstPart = (
   <>
@@ -99,7 +105,12 @@ export default function CreateEventsAll() {
   <>
    <section>
     <h3>Название мероприятия</h3>
-    <Input key={2} size={'large'}></Input>
+    <Input
+     onChange={(e) => {
+      setState({ title: e });
+     }}
+     key={2}
+     size={'large'}></Input>
    </section>
    <section>
     <h3>Направления</h3>
@@ -148,7 +159,10 @@ export default function CreateEventsAll() {
    <section>
     <h3>Тэги</h3>
     <div style={{ maxWidth: '300px', width: 'fit-content', margin: '0px' }}>
-     <Tags></Tags>
+     <Tags
+      onChange={(e) => {
+       setState({ tags: e });
+      }}></Tags>
     </div>
    </section>
    <section>
@@ -216,14 +230,94 @@ export default function CreateEventsAll() {
     <h3>Описание требований</h3>
     <TextArea
      onChange={(e) => {
-      setState({ taskDescription: e.target.value });
+      setState({ requirements: e.target.value });
      }}
      placeholer={'Опишите требования к вашей задаче'}></TextArea>
    </section>
    <section>
     <h3>Описание опций</h3>
-    <TextArea placeholer={'Описание предоставляемых опций'}></TextArea>
+    <TextArea
+     onChange={(e) => {
+      setState({ facilities: e.target.value });
+     }}
+     placeholer={'Описание предоставляемых опций'}></TextArea>
    </section>
+   <div>
+    <Button
+     onClick={() => {
+      let data = { ...state };
+      let localtags = '[]';
+      if (data.tags) {
+       localtags = `[${data.tags.map((e) => `{name: "${e}"}`).join(', ')}]`;
+      }
+      let directions = `[${tags
+       .filter((e) => e.active)
+       .map((e) => `{name: "${e.title}"}`)
+       .join(', ')}]`;
+      console.log(directions);
+      console.log(
+       `
+        mutation {
+  createEvent(event: {title: "${data.title}", region: "${
+        data.region
+       }", address: "${data.address}", dateStart: ${data.dateStart}, dateEnd: ${
+        data.dateEnd
+       }, taskDescription: ${JSON.stringify(data.tags)}, requirements: ["${
+        data.requirements
+       }"], facilities: ["${data.facilities}"], materials: ["url"], email: "${
+        data.email
+       }", currentAmount: 0, maxAmount: 999, online: ${data.online.toString()}, participants: [], directions: ${directions}, tags: ${localtags}, published: false}) {
+    id
+    title
+    region
+    address
+    dateStart
+    dateEnd
+    taskDescription
+    requirements
+    facilities
+    materials
+    photoUrl
+    email
+    currentAmount
+    maxAmount
+    online
+    participants {
+      id
+      login
+      password
+      role {
+        id
+        name
+      }
+    }
+    owner {
+      id
+      login
+      password
+      role {
+        id
+        name
+      }
+    }
+    directions {
+      id
+    }
+    tags {
+      id
+    }
+    published
+  }
+}
+        `
+      );
+     }}
+     type={'primary'}
+     size={'large'}
+     disabled={validateButton2()}>
+     Создать заявку
+    </Button>
+   </div>
   </>
  );
 
