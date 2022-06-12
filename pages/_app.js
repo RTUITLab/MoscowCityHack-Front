@@ -5,6 +5,8 @@ import { useState } from 'react';
 
 function MyApp({ Component, pageProps }) {
  const [state, editState] = useState({
+  isLoggedIn: true,
+  type: 'organization',
   user: {
    name: 'Павел Сыроедов',
    avatar:
