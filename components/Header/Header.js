@@ -54,7 +54,12 @@ export default function Header({ disableButtons }) {
       content={() => {
        return (
         <div style={{ display: 'grid', gap: '15px' }}>
-         <Button>Настройки</Button>
+         <Button
+          onClick={() => {
+           router.push('/account/settings');
+          }}>
+          Настройки
+         </Button>
          <Button
           onClick={() => {
            setState({ isLoggedIn: false, user: {} });
