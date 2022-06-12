@@ -13,17 +13,14 @@
  flex: 1 1 20%;
  min-width: 200px;
  max-width: 300px;
- .meta {
+ .price {
+  color: black;
+  border: 1px solid green;
+  height: 40%;
+  justify-self: start;
+  font-size: 1.2em;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  .price {
-   color: black;
-   font-size: 1.2em;
-   display: flex;
-   justify-content: flex-start;
-   align-items: center;
-   margin: 5% 0;
-  }
+  justify-content: center;
+  align-items: flex-end;
  }
 }

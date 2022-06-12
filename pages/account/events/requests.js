@@ -51,11 +51,11 @@ export default function Requests() {
    dataIndex: 'tags',
    render: (_, { tags }) => (
     <>
-     {tags.map((tag) => {
+     {tags.map((tag, i) => {
       let color = tag.length > 5 ? 'geekblue' : 'green';
 
       return (
-       <React.Fragment key={tag + Math.random() * 99}>
+       <React.Fragment key={i}>
         <Tag color={color}>{tag.toUpperCase()}</Tag>
        </React.Fragment>
       );

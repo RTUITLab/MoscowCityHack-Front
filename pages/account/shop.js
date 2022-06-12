@@ -65,18 +65,10 @@ function ShopCard(props) {
      />
     }
     actions={[heart, shoppingCart]}>
-    <Meta
-     title={title}
-     description={
-      <div className={styles.meta}>
-       {description}
-       <div className={styles.price}>
-        <Badge />
-        <div style={{ display: 'flex', alignItems: 'center' }}>{price}</div>
-       </div>
-      </div>
-     }
-    />
+    <Meta title={title} description={description} />
+    <div className={styles.price}>
+     <div>Цена: {price}</div>
+    </div>
    </Card>
   </div>
  );

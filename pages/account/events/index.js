@@ -4,6 +4,7 @@ import {
  DatePicker,
  Divider,
  Input,
+ message,
  Select,
  Space,
  Table,
@@ -17,6 +18,7 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import { district, tags } from '../../../utils/data';
 import Link from 'next/link';
 import Map from '../../../components/map';
+import { createQuery } from '../../../services';
 
 const { Option } = Select;
 
@@ -24,6 +26,7 @@ export default function Events() {
  const router = useRouter();
  const [viewMap, setMapVisible] = useState(false);
  const [state, editState] = useState({});
+ const [events, setEvents] = useState([]);
  const setState = (e) => {
   editState((prevState) => ({ ...prevState, ...e }));
  };
@@ -33,42 +36,55 @@ export default function Events() {
    setState({ name: router.query.search });
    document.getElementById('name-input').focus();
   }
+  getEvents();
  }, []);
 
- const test = [
-  {
-   name: 'Имя аааа',
-   date: new Date().getTime(),
-   tags: ['fdfdf', 'fdfdsf', 'fdfdf'],
-   district: 'Юго-Запад',
-   org: 'Юго-Запад',
-  },
-  {
-   name: 'Имя аааа',
-   date: new Date().getTime(),
-   tags: ['fdfdf', 'fdfdsf', 'fdfdf'],
-   district: 'Юго-Запад',
-   org: 'Юго-Запад',
-  },
- ];
+ async function getEvents() {
+  let events = await createQuery(`
+  query{getEvents{
+    id,
+    title,
+    region,
+    dateStart,
+    dateEnd,
+    owner {
+      id
+      role {
+        name
+      }
+    },
+    directions {
+      id
+    },
+    tags {
+      id
+    },
+    published
+  }}
+    `);
+  events = events?.data?.getEvents;
+  events?.filter((event) => event.published === true);
+  console.log(events);
+  setEvents(events);
+ }
 
  const columns = [
   {
    title: 'Название',
-   dataIndex: 'name',
-   key: 'name',
-   render: (text, id) => <Link href={`./events/${id}`}>{text}</Link>,
+   dataIndex: 'title',
+   key: 'title',
+   render: (text, { id }) => <Link href={`./events/${id}`}>{text}</Link>,
   },
   {
    title: 'Организатор',
-   dataIndex: 'org',
-   key: 'name',
+   dataIndex: ['owner', 'id'],
+   key: 'owner',
    render: (text) => <div>{text}</div>,
   },
   {
    title: 'Дата',
-   dataIndex: 'date',
-   key: 'age',
+   dataIndex: 'dateStart',
+   key: 'dateStart',
    render: (e) => {
     return new Date(e).toLocaleDateString('ru');
    },
@@ -79,11 +95,11 @@ export default function Events() {
    dataIndex: 'tags',
    render: (_, { tags }) => (
     <>
-     {tags.map((tag) => {
+     {tags.map((tag, i) => {
       let color = tag.length > 5 ? 'geekblue' : 'green';
 
       return (
-       <React.Fragment key={tag + Math.random() * 99}>
+       <React.Fragment key={i}>
         <Tag color={color}>{tag.toUpperCase()}</Tag>
        </React.Fragment>
       );
@@ -93,13 +109,13 @@ export default function Events() {
   },
   {
    title: 'Направление',
-   dataIndex: 'district',
+   dataIndex: 'directions',
    key: 'address',
   },
   {
    title: 'Район',
-   dataIndex: 'district',
-   key: 'address',
+   dataIndex: 'region',
+   key: 'region',
   },
  ];
 
@@ -155,7 +171,7 @@ export default function Events() {
         borderRadius: '7px',
        }}
        columns={columns}
-       dataSource={test}
+       dataSource={events}
       />
      )}
      <div
