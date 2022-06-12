@@ -208,8 +208,7 @@ const Index = () => {
 
 export async function initUserData(setU, setState) {
  const ROLE = localStorage.getItem('ROLE');
- const DATA = (
-  await createQuery(`
+ let DATA = await createQuery(`
     {
     getAdvancementByToken {
       level
@@ -217,8 +216,8 @@ export async function initUserData(setU, setState) {
       exp
     }
   }
-    `)
- ).data.getAdvancementByToken;
+    `);
+ DATA = DATA?.data?.getAdvancementByToken;
 
  const EVENTS = (
   await createQuery(`

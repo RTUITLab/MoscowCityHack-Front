@@ -48,7 +48,7 @@ export default function Layout({ children }) {
    setTitle('Друзья');
   } else if (currentHref === '/account/bonuses') {
    setActiveTab('bonuses');
-   setTitle('Бонусы');
+   setTitle('История начисления баллов');
   } else if (currentHref === '/account/learning') {
    setActiveTab('learning');
    setTitle('Центр обучения');
@@ -116,7 +116,7 @@ export default function Layout({ children }) {
        }}
        key={'bonuses'}
        icon={<WalletOutlined />}>
-       Мои бонусы
+       Баллы добра
       </Menu.Item>
       <Menu.Item
        onClick={() => {

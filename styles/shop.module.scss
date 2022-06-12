@@ -3,24 +3,19 @@
  display: flex;
  flex-wrap: wrap;
  gap: 20px;
-
- .action {
-  font-size: 1.5em;
- }
 }
-
 .cardWrapper {
  flex: 1 1 20%;
  min-width: 200px;
  max-width: 300px;
  .price {
-  color: black;
-  border: 1px solid green;
-  height: 40%;
-  justify-self: start;
-  font-size: 1.2em;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  width: 80%;
+  position: absolute;
+  bottom: 12%;
+  color: black;
+
+  font-size: 1.2em;
  }
 }
