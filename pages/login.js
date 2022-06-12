@@ -10,7 +10,7 @@ const { Option } = Select;
 
 export default function Home() {
  const [state, setState] = useAuth();
- const [accountType, setAccountType] = [state.user.accountType, setState]; //!!!
+ const [accountType, setAccountType] = useState('person'); //[state.user.accountType, setState]; //!!!
  const [loading, setLoading] = useState(false);
  const router = useRouter();
 
