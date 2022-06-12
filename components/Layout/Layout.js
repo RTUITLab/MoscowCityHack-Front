@@ -23,10 +23,17 @@ export default function Layout({ children }) {
 
  useEffect(() => {
   let currentHref = router.pathname;
-  console.log(currentHref);
   if (currentHref === '/account') {
    setActiveTab('profile');
    setTitle('Профиль');
+  } else if (currentHref === '/account/achievements') {
+   setActiveTab('profile');
+   setTitle(
+    <PageHeader
+     onBack={() => router.push('/account/events')}
+     title="Достижения"
+    />
+   );
   } else if (currentHref === '/account/events') {
    setActiveTab('events');
    setTitle('Мероприятия');
@@ -35,66 +42,7 @@ export default function Layout({ children }) {
    setTitle('Создание нового мероприятия');
   } else if (currentHref === '/account/shop') {
    setActiveTab('shop');
-   setTitle(
-    <div
-     style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-     }}>
-     Лавка волонтера
-     <div
-      style={{
-       display: 'flex',
-       justifyContent: 'space-around',
-       alignItems: 'center',
-      }}>
-      <Popover
-       title="Избранное"
-       content={() => {
-        return (
-         <div style={{ display: 'grid', gap: '15px' }}>
-          <CartRow></CartRow>
-          <CartRow></CartRow>
-         </div>
-        );
-       }}
-       placement="bottomLeft">
-       <Button type="text">
-        <HeartFilled />
-        Избранное
-       </Button>
-      </Popover>
-      <Popover
-       title="Корзина"
-       content={() => {
-        return (
-         <div style={{ display: 'grid', gap: '15px' }}>
-          <CartRow></CartRow>
-          <CartRow></CartRow>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-           <Button
-            style={{ width: 'fit-content' }}
-            type={'primary'}
-            onClick={() => {
-             setState({ showCart: true });
-            }}>
-            Оформить заказ
-           </Button>
-          </div>
-         </div>
-        );
-       }}
-       placement="bottomLeft">
-       <Button type="text">
-        <ShoppingFilled />
-        Корзина
-       </Button>
-      </Popover>
-      <Badge count={123} />
-     </div>
-    </div>
-   );
+   setTitle(<ShopHeader />);
   } else if (currentHref === '/account/events/[eventId]') {
    setActiveTab('events');
    setTitle(
@@ -129,6 +77,14 @@ export default function Layout({ children }) {
        key={'events'}
        icon={<MailOutlined />}>
        Мероприятия
+      </Menu.Item>
+      <Menu.Item
+       onClick={() => {
+        router.push('/account/friends');
+       }}
+       key={'friends'}
+       icon={<ShoppingCartOutlined />}>
+       Друзья
       </Menu.Item>
       <Menu.Item
        onClick={() => {
@@ -193,6 +149,69 @@ const CartRow = (e) => {
    <div>
     <HeartFilled />
     <HeartOutlined />
+   </div>
+  </div>
+ );
+};
+
+const ShopHeader = () => {
+ return (
+  <div
+   style={{
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+   }}>
+   Лавка волонтера
+   <div
+    style={{
+     display: 'flex',
+     justifyContent: 'space-around',
+     alignItems: 'center',
+    }}>
+    <Popover
+     title="Избранное"
+     content={() => {
+      return (
+       <div style={{ display: 'grid', gap: '15px' }}>
+        <CartRow></CartRow>
+        <CartRow></CartRow>
+       </div>
+      );
+     }}
+     placement="bottomLeft">
+     <Button type="text">
+      <HeartFilled />
+      Избранное
+     </Button>
+    </Popover>
+    <Popover
+     title="Корзина"
+     content={() => {
+      return (
+       <div style={{ display: 'grid', gap: '15px' }}>
+        <CartRow></CartRow>
+        <CartRow></CartRow>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+         <Button
+          style={{ width: 'fit-content' }}
+          type={'primary'}
+          onClick={() => {
+           setState({ showCart: true });
+          }}>
+          Оформить заказ
+         </Button>
+        </div>
+       </div>
+      );
+     }}
+     placement="bottomLeft">
+     <Button type="text">
+      <ShoppingFilled />
+      Корзина
+     </Button>
+    </Popover>
+    <Badge count={123} />
    </div>
   </div>
  );
