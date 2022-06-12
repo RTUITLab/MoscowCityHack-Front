@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Button, Image, Progress, Tag } from 'antd';
 import {
- HomeOutlined,
  FieldTimeOutlined,
+ HomeOutlined,
  InfoCircleOutlined,
 } from '@ant-design/icons';
 import { useAuth } from '../../../contexts/MainContext';
@@ -12,17 +12,18 @@ import { useAuth } from '../../../contexts/MainContext';
 export default function EventPage() {
  const [state, setState] = useAuth();
  const router = useRouter();
- let project;
+ const [project, setProject] = useState(undefined);
  const { eventId } = router.query;
 
  function getData(id) {
-  project = state.user.eventsParticipate[id];
+  return state.user.eventsParticipate[id];
  }
 
  useEffect(() => {
-  getData(0);
- }, [eventId]);
+  setProject(getData(0));
+ }, []);
 
+ if (!project) return null;
  return (
   <>
    {project === 'empty' ? (
