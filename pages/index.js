@@ -18,7 +18,7 @@ export default function IndexPage() {
      display: 'flex',
      justifyContent: 'center',
      alignItems: 'center',
-     height: 'calc(100vh - 100px)',
+     height: 'calc(100vh - 50px)',
     }}>
     <div className={st.contentContainer}>
      <div className={st.textContainer}>
