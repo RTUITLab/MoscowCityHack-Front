@@ -96,7 +96,14 @@ const Index = () => {
        <Image alt="Ваше фото" src={user.avatar} />
       </>
      }
-     actions={[<SettingOutlined key="setting" />]}>
+     actions={[
+      <SettingOutlined
+       onClick={() => {
+        router.push('/account/settings');
+       }}
+       key="setting"
+      />,
+     ]}>
      <div className={styles.bottomStats}>
       <Descriptions
        column={1}

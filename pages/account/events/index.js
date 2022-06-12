@@ -17,7 +17,6 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import { district, tags } from '../../../utils/data';
 import Link from 'next/link';
 import Map from '../../../components/map';
-import { getData } from '../../../services';
 
 const { Option } = Select;
 
