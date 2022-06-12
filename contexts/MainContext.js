@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
 const context = React.createContext({});
@@ -25,8 +25,8 @@ function ContextProvider({ children }) {
 function RequireAuth({ children }) {
  const isLoggedIn = useAuth()[0].isLoggedIn;
  const router = useRouter();
- console.log(isLoggedIn);
  if (
+  false &&
   !isLoggedIn &&
   router.pathname !== '/' &&
   router.pathname !== '/login' &&
