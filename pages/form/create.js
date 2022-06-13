@@ -4,6 +4,7 @@ import {
  DatePicker,
  Divider,
  Input,
+ message,
  Radio,
  Select,
  Slider,
@@ -16,6 +17,7 @@ import React, { useState } from 'react';
 import Tags from '../../components/Tags/Tags';
 import { district, tags as tagsData } from '../../utils/data';
 import { createQuery } from '../../services';
+import { useRouter } from 'next/router';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -23,7 +25,7 @@ const { TextArea } = Input;
 
 export default function CreateEventsAll() {
  const [part, setPart] = useState(0);
-
+ const router = useRouter();
  const [tags, setTags] = useState(tagsData);
 
  const onTagClick = (i) => {
@@ -314,7 +316,12 @@ export default function CreateEventsAll() {
 }
         `;
 
-      createQuery(createRequestData);
+      createQuery(createRequestData).then(() => {
+       message.info('Заявка успешно создана');
+       setTags(() => {
+        router.push('/');
+       }, 1500);
+      });
      }}
      type={'primary'}
      size={'large'}
