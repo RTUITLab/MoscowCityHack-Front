@@ -82,11 +82,14 @@ export function sendData(mutationProps, data) {
  });
 }
 
-export function createQuery(query) {
- const TOKEN =
+export function createQuery(query, params) {
+ let TOKEN =
   new TokenManager().getToken(undefined, undefined, {
    new: false,
   }) || '';
+ if (params?.withoutToken) {
+  TOKEN = '';
+ }
  return fetch(process.env.NEXT_PUBLIC_API_HOST, {
   method: 'POST',
   headers: {

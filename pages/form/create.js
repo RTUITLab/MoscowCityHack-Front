@@ -324,7 +324,7 @@ export default function CreateEventsAll() {
 
       console.log(createRequestData);
 
-      createQuery(createRequestData).then(() => {
+      createQuery(createRequestData, { withoutToken: true }).then(() => {
        message.info('Заявка успешно создана');
        setTimeout(() => {
         router.push('/');
