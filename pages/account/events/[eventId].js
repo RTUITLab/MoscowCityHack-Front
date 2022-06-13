@@ -7,23 +7,67 @@ import {
  HomeOutlined,
  InfoCircleOutlined,
 } from '@ant-design/icons';
+import { createQuery } from '../../../services';
 import { useAuth } from '../../../contexts/MainContext';
+import { tags } from '../../../utils/data';
 
 export default function EventPage() {
  const [state, setState] = useAuth();
  const router = useRouter();
- const [project, setProject] = useState(undefined);
+ const [project, setProject] = useState('empty');
  const { eventId } = router.query;
 
- function getData(id) {
-  return state.user.eventsParticipate[id];
+ function initProject(proj) {
+  setProject(() => proj);
+ }
+
+ async function getData(id) {
+  let event = await createQuery(
+   `query{
+    searchEvents(filter: [
+      {key: "id",
+        operator: "EQUAL",
+        fieldType: "INTEGER",
+        value: "${id}"}]) {
+      id
+      title
+      dateStart
+    address
+    region
+    taskDescription
+    requirements
+    facilities
+    materials
+    currentAmount
+    maxAmount
+    online
+    owner {
+      id
+    }
+    tags {
+      id 
+      name
+    }
+      directions {
+        name
+        id
+      }
+      }
+  }`
+  );
+  event = event?.data?.searchEvents[0] || 'empty';
+  console.log('e ', event);
+  initProject(event);
  }
 
  useEffect(() => {
-  setProject(getData(0));
+  getData(eventId);
  }, []);
 
- if (!project) return null;
+ useEffect(() => {
+  console.log('eve   ', project);
+ }, [project]);
+
  return (
   <>
    {project === 'empty' ? (
@@ -33,9 +77,9 @@ export default function EventPage() {
    ) : (
     <div className={styles.eventWrapper}>
      <header className={styles.projectHead}>
-      <h2>{project.title}</h2>
+      <h2>{project.name}</h2>
       <div className={styles.projectStatus}>
-       {project.online === 'online' ? (
+       {project.online ? (
         <>
          <img src={'/images/home.svg'} width={25} height={25} />
          Онлайн
@@ -53,7 +97,7 @@ export default function EventPage() {
      </header>
      <section className={styles.projectTop}>
       <Image
-       src={project.imgSrc}
+       src={project.imgSrc || project.materials[0]}
        width={400}
        height={480}
        style={{ objectFit: 'cover' }}
@@ -69,14 +113,14 @@ export default function EventPage() {
           icon={
            <img src="/images/plant.svg" style={{ backgroundColor: 'white' }} />
           }>
-          {direction}
+          {direction.name}
          </Button>
         ))}
        </div>
        <div className={styles.texts}>
         <div className={styles.text}>
          <InfoCircleOutlined />
-         {project.companyName}
+         {project?.owner?.id || 'Создатель мероприятия не указан'}
         </div>
         <div className={styles.text}>
          <HomeOutlined />
@@ -84,22 +128,22 @@ export default function EventPage() {
         </div>
         <div className={styles.text}>
          <FieldTimeOutlined />
-         {new Date(project.date).toString()}
+         {new Date(project.dateStart).toLocaleString('ru')}
         </div>
        </div>
        <div className={styles.places}>
         <span>Осталось мест</span>
-        <span>{project.capacity[0] + '/' + project.capacity[1]}</span>
+        <span>{project.currentAmount + '/' + project.maxAmount}</span>
        </div>
        <Progress
         status="active"
-        percent={(project.capacity[0] / project.capacity[1]) * 100}
+        percent={(project.currentAmount / project.maxAmount) * 100}
        />
        <div className={styles.tags}>
         <h4>Теги: </h4>
-        {project.tags.map((tag, i) => (
+        {project.tags.map((gotTag, i) => (
          <Tag key={i} className={styles.tag}>
-          {tag}
+          {tags.filter((t) => t.name === gotTag.name)[0]?.title || 'Общество'}
          </Tag>
         ))}
        </div>

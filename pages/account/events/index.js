@@ -27,13 +27,15 @@ export default function Events() {
  const [viewMap, setMapVisible] = useState(false);
  const [state, editState] = useState({});
  const [events, setEvents] = useState([]);
+ const [search, setSearch] = useState('');
  const setState = (e) => {
   editState((prevState) => ({ ...prevState, ...e }));
  };
 
  useEffect(() => {
   if (router.query.search) {
-   setState({ name: router.query.search });
+   //setState({ name: router.query.search });
+   setSearch({ name: router.query.search });
    document.getElementById('name-input').focus();
   }
   getEvents();
@@ -55,8 +57,8 @@ export default function Events() {
       }
     },
     directions {
-      id
       name
+      id
     },
     tags {
       id
@@ -65,9 +67,9 @@ export default function Events() {
     published
   }}
     `);
+  console.log(events);
   events = events?.data?.getEvents;
   events?.filter((event) => event.published === true);
-  console.log(events);
   setEvents(events);
  }
 
@@ -82,7 +84,13 @@ export default function Events() {
    title: 'Организатор',
    dataIndex: ['owner', 'id'],
    key: 'owner',
-   render: (text) => <div>{text}</div>,
+   render: async (id) => {
+    let q = await createQuery(`getCompanyByUserId(userId: ${id}) {
+      id
+    }`);
+    console.log(q);
+    return 1;
+   },
   },
   {
    title: 'Дата',
@@ -96,16 +104,19 @@ export default function Events() {
    title: 'Тэги',
    key: 'tags',
    dataIndex: 'tags',
-   render: (tags) => {
-    return tags.map((tag, i) => {
-     let tagName = tag.name.toUpperCase();
-     let color = tagName.length > 5 ? 'geekblue' : 'green';
-     return (
-      <React.Fragment key={i}>
-       <Tag color={color}>{tagName}</Tag>
-      </React.Fragment>
-     );
-    });
+   render: (gotTags) => {
+    <>
+     {gotTags.map((gotTag, i) => {
+      let tagName =
+       tags.filter((t) => t.name === gotTag.name)[0]?.title || 'Общество';
+      let color = tagName.length > 5 ? 'geekblue' : 'green';
+      return (
+       <React.Fragment key={i}>
+        <Tag color={color}>{tagName}</Tag>
+       </React.Fragment>
+      );
+     })}
+    </>;
    },
   },
   {
@@ -114,12 +125,12 @@ export default function Events() {
    key: 'address',
    render: (directions) => (
     <>
-     {directions.map((tag, i) => {
-      let tagName = tag.name.toUpperCase();
-      let color = tagName.length > 5 ? 'geekblue' : 'green';
+     {directions.map((dir, i) => {
+      let dirName = dir.name;
+      let color = dirName.length > 5 ? 'geekblue' : 'green';
       return (
        <React.Fragment key={i}>
-        <Tag color={color}>{tagName}</Tag>
+        <Tag color={color}>{dirName}</Tag>
        </React.Fragment>
       );
      })}
