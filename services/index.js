@@ -63,6 +63,7 @@ export function sendData(mutationProps, data) {
     }
    } `;
  }
+ console.log(mutation);
  return new Promise((resolve) => {
   fetch(process.env.NEXT_PUBLIC_API_HOST, {
    method: 'POST',
