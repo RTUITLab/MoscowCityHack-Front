@@ -6,12 +6,11 @@ import Head from 'next/head';
 const context = React.createContext({});
 
 function useAuth() {
- //кастомный хук для удобства
  return React.useContext(context);
 }
 
 export function useUser() {
- const [state, setState] = useContext(context);
+ const [state, setState] = useAuth();
  return [
   state.user,
   (e) => {

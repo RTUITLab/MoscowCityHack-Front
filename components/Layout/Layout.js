@@ -144,7 +144,7 @@ export default function Layout({ children }) {
     </div>
 
     <Modal
-     title="BuyModal"
+     title="Окно подтверждения покупки"
      visible={state?.showCart || false}
      onOk={() => {
       setState({ showCart: false });
