@@ -48,7 +48,7 @@ export default function CreateEventsAll() {
  };
  const validateButton2 = () => {
   if (part === 0) {
-   return !(Object.keys(state).length >= 4);
+   return state?.tags?.length > 0 && state?.district?.length > 0;
   } else {
   }
  };
@@ -264,7 +264,7 @@ export default function CreateEventsAll() {
       }", address: "${data.address || ''}", dateStart: ${
        data.dateStart || ''
       }, dateEnd: ${data.dateEnd}, taskDescription: ${JSON.stringify(
-       data.tags
+       data.tags || []
       )}, requirements: ["${data.requirements || ''}"], facilities: ["${
        data.facilities
       }"], materials: ["url"], email: "${

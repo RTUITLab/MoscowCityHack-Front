@@ -3,7 +3,7 @@ import { Input, Tag, Tooltip } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 
 const App = (props) => {
- const [tags, setTags] = useState(['Tag 2', 'Tag 3']);
+ const [tags, setTags] = useState([]);
  const [inputVisible, setInputVisible] = useState(false);
  const [inputValue, setInputValue] = useState('');
  const [editInputIndex, setEditInputIndex] = useState(-1);
