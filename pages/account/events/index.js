@@ -28,6 +28,12 @@ export default function Events() {
  const [state, editState] = useState({});
  const [user, setUser] = useUser();
  const [events, setEvents] = useState([]);
+
+ let searchParams = {};
+ const setSearchParams = (e) => {
+  searchParams = { ...searchParams, ...e };
+ };
+
  const setState = (e) => {
   editState((prevState) => ({ ...prevState, ...e }));
  };
@@ -40,6 +46,65 @@ export default function Events() {
   getEvents();
   console.log(events);
  }, []);
+
+ function ObjectToString(obj) {
+  let result = [];
+  for (let i of Object.keys(obj)) {
+   result.push(`${i}: "${obj[i]}"`);
+  }
+  return result.join(', ');
+ }
+
+ function findEvents() {
+  createQuery(`
+									query{
+										searchEvents(filter:[{key:"title",value:"${searchParams.title}",operator:"LIKE",fieldType:"STRING"}]){
+										id
+    title
+    region
+    address
+    dateStart
+    dateEnd
+    taskDescription
+    requirements
+    facilities
+    materials
+    photoUrl
+    email
+    currentAmount
+    maxAmount
+    online
+    participants {
+      id
+      login
+      password
+      role {
+        id
+        name
+      }
+    }
+    owner {
+      id
+      login
+      password
+      role {
+        id
+        name
+      }
+    }
+    directions {
+      id, name
+    }
+    tags {
+      id, name
+    }
+    published
+										}
+									}
+									`).then((e) => {
+   setEvents(e.data.searchEvents);
+  });
+ }
 
  async function getEvents() {
   let events = await createQuery(`
@@ -99,6 +164,7 @@ export default function Events() {
    dataIndex: 'tags',
    render: (tags) => {
     return tags.map((tag, i) => {
+     console.log(tag);
      let tagName = tag.name.toUpperCase();
      let color = tagName.length > 5 ? 'geekblue' : 'green';
      return (
@@ -147,6 +213,10 @@ export default function Events() {
        value={state.name}
        onChange={(e) => {
         setState({ name: e.target.value });
+        setSearchParams({ title: e.target.value });
+        setTimeout(() => {
+         findEvents();
+        }, 15);
        }}
        placeholder={'Поиск'}></Input>
      </div>
