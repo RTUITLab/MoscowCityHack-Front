@@ -37,6 +37,7 @@ export default function Events() {
    document.getElementById('name-input').focus();
   }
   getEvents();
+  console.log(events);
  }, []);
 
  async function getEvents() {
@@ -55,9 +56,11 @@ export default function Events() {
     },
     directions {
       id
+      name
     },
     tags {
       id
+      name
     },
     published
   }}
@@ -93,14 +96,30 @@ export default function Events() {
    title: 'Тэги',
    key: 'tags',
    dataIndex: 'tags',
-   render: (_, { tags }) => (
+   render: (tags) => {
+    return tags.map((tag, i) => {
+     let tagName = tag.name.toUpperCase();
+     let color = tagName.length > 5 ? 'geekblue' : 'green';
+     return (
+      <React.Fragment key={i}>
+       <Tag color={color}>{tagName}</Tag>
+      </React.Fragment>
+     );
+    });
+   },
+  },
+  {
+   title: 'Направление',
+   dataIndex: 'directions',
+   key: 'address',
+   render: (directions) => (
     <>
-     {tags.map((tag, i) => {
-      let color = tag.length > 5 ? 'geekblue' : 'green';
-
+     {directions.map((tag, i) => {
+      let tagName = tag.name.toUpperCase();
+      let color = tagName.length > 5 ? 'geekblue' : 'green';
       return (
        <React.Fragment key={i}>
-        <Tag color={color}>{tag.toUpperCase()}</Tag>
+        <Tag color={color}>{tagName}</Tag>
        </React.Fragment>
       );
      })}
@@ -108,14 +127,12 @@ export default function Events() {
    ),
   },
   {
-   title: 'Направление',
-   dataIndex: 'directions',
-   key: 'address',
-  },
-  {
    title: 'Район',
    dataIndex: 'region',
    key: 'region',
+   render: (region) => (
+    <div>{district.filter((dis) => dis.name === region)[0].title}</div>
+   ),
   },
  ];
 
