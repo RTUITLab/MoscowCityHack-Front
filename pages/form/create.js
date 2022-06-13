@@ -275,9 +275,7 @@ export default function CreateEventsAll() {
        data.facilities
       }"], materials: ["url"], email: "${
        data.email || ''
-      }", currentAmount: 0, maxAmount: 999, online: ${(
-       data.online || ''
-      ).toString()}, participants: [], directions: ${directions}, tags: ${localtags}, published: false}) {
+      }", currentAmount: 0, maxAmount: 999, online: ${data.online.toString()}, participants: [], directions: ${directions}, tags: ${localtags}, published: false}) {
     id
     title
     region
