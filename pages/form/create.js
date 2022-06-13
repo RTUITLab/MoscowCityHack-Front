@@ -15,6 +15,7 @@ import Header from '../../components/Header/Header';
 import React, { useState } from 'react';
 import Tags from '../../components/Tags/Tags';
 import { district, tags as tagsData } from '../../utils/data';
+import { createQuery } from '../../services';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -107,7 +108,7 @@ export default function CreateEventsAll() {
     <h3>Название мероприятия</h3>
     <Input
      onChange={(e) => {
-      setState({ title: e });
+      setState({ title: e.target.value });
      }}
      key={2}
      size={'large'}></Input>
@@ -254,19 +255,21 @@ export default function CreateEventsAll() {
        .filter((e) => e.active)
        .map((e) => `{name: "${e.title}"}`)
        .join(', ')}]`;
-      console.log(directions);
-      console.log(
-       `
+      const createRequestData = `
         mutation {
-  createEvent(event: {title: "${data.title}", region: "${
-        data.region
-       }", address: "${data.address}", dateStart: ${data.dateStart}, dateEnd: ${
-        data.dateEnd
-       }, taskDescription: ${JSON.stringify(data.tags)}, requirements: ["${
-        data.requirements
-       }"], facilities: ["${data.facilities}"], materials: ["url"], email: "${
-        data.email
-       }", currentAmount: 0, maxAmount: 999, online: ${data.online.toString()}, participants: [], directions: ${directions}, tags: ${localtags}, published: false}) {
+  createEvent(event: {title: "${data.title || ''}", region: "${
+       data.region || ''
+      }", address: "${data.address || ''}", dateStart: ${
+       data.dateStart || ''
+      }, dateEnd: ${data.dateEnd}, taskDescription: ${JSON.stringify(
+       data.tags
+      )}, requirements: ["${data.requirements || ''}"], facilities: ["${
+       data.facilities
+      }"], materials: ["url"], email: "${
+       data.email || ''
+      }", currentAmount: 0, maxAmount: 999, online: ${(
+       data.online || ''
+      ).toString()}, participants: [], directions: ${directions}, tags: ${localtags}, published: false}) {
     id
     title
     region
@@ -309,8 +312,9 @@ export default function CreateEventsAll() {
     published
   }
 }
-        `
-      );
+        `;
+
+      createQuery(createRequestData);
      }}
      type={'primary'}
      size={'large'}

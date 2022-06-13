@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import { events } from '../utils/data';
+import Head from 'next/head';
 
 const context = React.createContext({});
 
@@ -42,8 +43,13 @@ function RequireAuth({ children }) {
    router.pathname
   ) === -1
  ) {
-  setTimeout(() => router.push('/login'), 0); //вместо этого можно добавить страницу "вы не авторизованы" с кнопкой возврата на Login
-  return <></>;
+  return (
+   <>
+    <Head>
+     <meta httpEquiv="refresh" content="0; url=/login" />
+    </Head>
+   </>
+  );
  }
 
  return children;
