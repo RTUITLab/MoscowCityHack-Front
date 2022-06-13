@@ -53,15 +53,27 @@ const Index = () => {
   },
  ];
 
- const data = (user.events || []).map((e, i) => {
-  return {
-   key: i.toString(),
-   type: e.title,
-   time: Math.ceil((e.dateEnd - e.dateStart) / 60),
-   timeStart: new Date(e.dateStart).toLocaleString('ru'),
-   timeEnd: new Date(e.dateEnd).toLocaleString('ru'),
-  };
- });
+ const mockup_data = [
+  {
+   key: '0',
+   type: 'Какое-то мероприятие',
+   time: 4,
+   timeStamp: new Date().getTime(),
+   timeEnd: new Date().getTime(),
+  },
+ ];
+
+ const data = (user.events || [])
+  .map((e, i) => {
+   return {
+    key: i.toString(),
+    type: e.title,
+    time: Math.ceil((e.dateEnd - e.dateStart) / 60),
+    timeStart: new Date(e.dateStart).toLocaleString('ru'),
+    timeEnd: new Date(e.dateEnd).toLocaleString('ru'),
+   };
+  })
+  .concat(mockup_data);
 
  return (
   <div className={styles.profileWrapper}>
@@ -258,7 +270,7 @@ export async function initUserData(setU, setState) {
     events: EVENTS,
    });
   });
- } else {
+ } else if (ROLE === 'ROLE_COMPANY') {
   createQuery(`
     query{
      getCompanyByToken{id, name,user{id}}
@@ -276,6 +288,19 @@ export async function initUserData(setU, setState) {
     level: DATA?.level || 0,
     events: EVENTS,
    });
+  });
+ } else {
+  setU({
+   id: 0,
+   name: 'Админ',
+   surname: '',
+   birthdate: undefined,
+   userId: 0,
+   exp: DATA?.exp || 0,
+   points: DATA?.points || 0,
+   level: DATA?.level || 0,
+   events: EVENTS,
+   role: 'ROLE_MODERATOR',
   });
  }
 }

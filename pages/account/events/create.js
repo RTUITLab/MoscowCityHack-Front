@@ -11,6 +11,7 @@ import styles from '../../../styles/events-create.module.scss';
 import React, { useState } from 'react';
 import Tags from '../../../components/Tags/Tags';
 import { district, tags as tagsData } from '../../../utils/data';
+import Link from 'next/link';
 
 const { TextArea } = Input;
 const Option = Select;
@@ -26,6 +27,12 @@ export default function CreateEvents({ createdBy }) {
 
  return (
   <div className={styles.parent}>
+   <span>
+    Данная форма сейчас недоступна. События можно создавать{' '}
+    <Link href={'/form/create'}>здесь</Link>
+   </span>
+   <br />
+   <br />
    <header>
     <h3>Основная информация</h3>
    </header>
@@ -158,7 +165,15 @@ export default function CreateEvents({ createdBy }) {
     </section>
    </main>
    <div style={{ marginTop: '30px' }}>
-    <Button type={'primary'}>Создать событие</Button>
+    <Button type={'primary'} disabled>
+     Создать событие
+    </Button>
+    <br />
+    <br />
+    <span>
+     Данная форма сейчас недоступна. События можно создавать{' '}
+     <Link href={'/form/create'}>здесь</Link>
+    </span>
    </div>
   </div>
  );

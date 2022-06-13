@@ -4,7 +4,6 @@ import {
  DatePicker,
  Divider,
  Input,
- message,
  Select,
  Space,
  Table,
@@ -19,6 +18,7 @@ import { district, tags } from '../../../utils/data';
 import Link from 'next/link';
 import Map from '../../../components/map';
 import { createQuery } from '../../../services';
+import { useUser } from '../../../contexts/MainContext';
 
 const { Option } = Select;
 
@@ -26,8 +26,14 @@ export default function Events() {
  const router = useRouter();
  const [viewMap, setMapVisible] = useState(false);
  const [state, editState] = useState({});
+ const [user, setUser] = useUser();
  const [events, setEvents] = useState([]);
- const [search, setSearch] = useState('');
+
+ let searchParams = {};
+ const setSearchParams = (e) => {
+  searchParams = { ...searchParams, ...e };
+ };
+
  const setState = (e) => {
   editState((prevState) => ({ ...prevState, ...e }));
  };
@@ -41,6 +47,65 @@ export default function Events() {
   getEvents();
   console.log(events);
  }, []);
+
+ function ObjectToString(obj) {
+  let result = [];
+  for (let i of Object.keys(obj)) {
+   result.push(`${i}: "${obj[i]}"`);
+  }
+  return result.join(', ');
+ }
+
+ function findEvents() {
+  createQuery(`
+									query{
+										searchEvents(filter:[{key:"title",value:"${searchParams.title}",operator:"LIKE",fieldType:"STRING"}]){
+										id
+    title
+    region
+    address
+    dateStart
+    dateEnd
+    taskDescription
+    requirements
+    facilities
+    materials
+    photoUrl
+    email
+    currentAmount
+    maxAmount
+    online
+    participants {
+      id
+      login
+      password
+      role {
+        id
+        name
+      }
+    }
+    owner {
+      id
+      login
+      password
+      role {
+        id
+        name
+      }
+    }
+    directions {
+      id, name
+    }
+    tags {
+      id, name
+    }
+    published
+										}
+									}
+									`).then((e) => {
+   setEvents(e.data.searchEvents);
+  });
+ }
 
  async function getEvents() {
   let events = await createQuery(`
@@ -104,19 +169,16 @@ export default function Events() {
    title: 'Тэги',
    key: 'tags',
    dataIndex: 'tags',
-   render: (gotTags) => {
-    <>
-     {gotTags.map((gotTag, i) => {
-      let tagName =
-       tags.filter((t) => t.name === gotTag.name)[0]?.title || 'Общество';
-      let color = tagName.length > 5 ? 'geekblue' : 'green';
-      return (
-       <React.Fragment key={i}>
-        <Tag color={color}>{tagName}</Tag>
-       </React.Fragment>
-      );
-     })}
-    </>;
+   render: (tags) => {
+    return tags.map((tag, i) => {
+     let tagName = tag.name.toUpperCase();
+     let color = tagName.length > 5 ? 'geekblue' : 'green';
+     return (
+      <React.Fragment key={i}>
+       <Tag color={color}>{tagName}</Tag>
+      </React.Fragment>
+     );
+    });
    },
   },
   {
@@ -157,6 +219,10 @@ export default function Events() {
        value={state.name}
        onChange={(e) => {
         setState({ name: e.target.value });
+        setSearchParams({ title: e.target.value });
+        setTimeout(() => {
+         findEvents();
+        }, 15);
        }}
        placeholder={'Поиск'}></Input>
      </div>
@@ -164,18 +230,22 @@ export default function Events() {
       <Button type={'primary'}>Поиск</Button>
      </div>
      <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-      <Button
-       onClick={() => {
-        router.push('/account/events/create');
-       }}>
-       Создать мероприятие
-      </Button>
-      <Button
-       onClick={() => {
-        router.push('/account/events/requests');
-       }}>
-       Просмотр заявок
-      </Button>
+      {user.role === 'ROLE_MODERATOR' ? (
+       <>
+        <Button
+         onClick={() => {
+          router.push('/account/events/create');
+         }}>
+         Создать мероприятие
+        </Button>
+        <Button
+         onClick={() => {
+          router.push('/account/events/requests');
+         }}>
+         Просмотр заявок
+        </Button>
+       </>
+      ) : null}
       <Divider style={{ height: '100%' }} type="vertical" />
       <Button
        type="link"

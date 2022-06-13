@@ -47,10 +47,16 @@ export default function CreateEventsAll() {
   }
  };
  const validateButton2 = () => {
-  if (part === 0) {
-   return state?.tags?.length > 0 && state?.district?.length > 0;
-  } else {
-  }
+  return !(
+   state.title &&
+   state.online !== undefined &&
+   state.tags &&
+   state.taskDescription &&
+   state.requirements &&
+   state.facilities &&
+   state.dateStart &&
+   state.dateEnd
+  );
  };
 
  const firstPart = (
@@ -315,6 +321,8 @@ export default function CreateEventsAll() {
   }
 }
         `;
+
+      console.log(createRequestData);
 
       createQuery(createRequestData).then(() => {
        message.info('Заявка успешно создана');

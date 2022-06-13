@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { events } from '../utils/data';
 import Head from 'next/head';
@@ -63,8 +63,7 @@ const testState = {
   items: [
    {
     id: 23,
-    imgSrc:
-     'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
+    imgSrc: '/images/1.webp',
     title: 'Футболка',
     description: 'Хлопок 100%, выдерживает 2000 стирок',
     price: 300,
@@ -73,8 +72,7 @@ const testState = {
    },
    {
     id: 13,
-    imgSrc:
-     'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
+    imgSrc: '/images/2.webp',
     title: 'Кепка',
     description: 'Красная кепка',
     price: 100,
@@ -83,8 +81,7 @@ const testState = {
    },
    {
     id: 46,
-    imgSrc:
-     'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
+    imgSrc: '/images/3.webp',
     title: 'Рюкзак',
     description: 'Водонепроницаемый рюкзак красного цвета двадцатого века',
     price: 20,
@@ -93,8 +90,7 @@ const testState = {
    },
    {
     id: 256,
-    imgSrc:
-     'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
+    imgSrc: '/images/4.webp',
     title: 'Самолет',
     description: 'О',
     price: 3000000,
