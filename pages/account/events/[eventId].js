@@ -179,7 +179,7 @@ export default function EventPage() {
       <div className={styles.materials}>
        <Image.PreviewGroup>
         {project.materials.map((img, i) => (
-         <Image src={img} key={i} width={350} />
+         <Image src={'/images/default.jpg'} key={i} width={350} />
         ))}
        </Image.PreviewGroup>
       </div>
