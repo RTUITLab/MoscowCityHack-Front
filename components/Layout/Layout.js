@@ -142,8 +142,9 @@ export default function Layout({ children }) {
      <div style={{ height: '50px' }}></div>
      <div>{children}</div>
     </div>
+
     <Modal
-     title="Basic Modal"
+     title="BuyModal"
      visible={state?.showCart || false}
      onOk={() => {
       setState({ showCart: false });
@@ -151,9 +152,16 @@ export default function Layout({ children }) {
      onCancel={() => {
       setState({ showCart: false });
      }}>
-     <p>Some contents...</p>
-     <p>Some contents...</p>
-     <p>Some contents...</p>
+     {state.user.points >= state.shop.totalCardPrice ? (
+      <div style={{ color: 'green' }}>
+       На вашем счету достаточное количество баллов! Нажмите ОК для продолжения
+      </div>
+     ) : (
+      <div style={{ color: 'red' }}>
+       На вашем счету недостаточное количество баллов! Пожалуйста, выберите
+       другой товар
+      </div>
+     )}
     </Modal>
    </div>
   </div>
@@ -177,7 +185,12 @@ function CartRow(props) {
   });
  }
  return (
-  <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+  <div
+   style={{
+    display: 'flex',
+    gap: '15px',
+    alignItems: 'center',
+   }}>
    <img
     style={{ objectFit: 'cover' }}
     height={50}
@@ -185,7 +198,11 @@ function CartRow(props) {
     src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
     alt=""
    />
-   <div className={styles.cartRowDesc} style={{}}>
+   <div
+    className={styles.cartRowDesc}
+    style={{
+     width: '100%',
+    }}>
     <span>{data.title}</span>
     <br />
     <div>{data.description}</div>
@@ -236,6 +253,7 @@ const ShopHeader = () => {
       style={{
        display: 'flex',
        alignItems: 'center',
+       fontSize: '0.75em',
       }}>
       <HeartFilled />
       Избранное
@@ -279,7 +297,9 @@ const ShopHeader = () => {
       );
      }}
      placement="bottomLeft">
-     <Button type="text" style={{ display: 'flex', alignItems: 'center' }}>
+     <Button
+      type="text"
+      style={{ display: 'flex', alignItems: 'center', fontSize: '0.75em' }}>
       <ShoppingFilled />
       Корзина
      </Button>
