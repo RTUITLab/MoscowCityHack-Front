@@ -41,6 +41,10 @@ export default function Events() {
  useEffect(() => {
   if (router.query.search) {
    setState({ name: router.query.search });
+   setSearchParams({ title: router.query.search });
+   setTimeout(() => {
+    findEvents();
+   }, 15);
    document.getElementById('name-input').focus();
   }
   getEvents();
@@ -149,8 +153,8 @@ export default function Events() {
    key: 'owner',
    render: async (id) => {
     /*let q = '';await createQuery(`query{getCompanyByUserId(userId: ${id}) {
-      id
-    }}`);*/
+							id
+						}}`);*/
     return 'Павел Семенов';
    },
   },
