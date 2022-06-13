@@ -35,11 +35,22 @@ export default function IndexPage() {
         size={'large'}>
         Создать аккаунт
        </Button>
+       <Button
+        style={{ marginLeft: '15px' }}
+        onClick={() => {
+         router.push('/login');
+        }}
+        type={'primary'}
+        size={'large'}>
+        Войти
+       </Button>
        <br />
        <br />
-       <Link href={'/form/create'} type={'primary'} size={'large'}>
-        Оставить заявку на помощь
-       </Link>
+       <Button type="default">
+        <Link href={'/form/create'} type={'primary'} size={'large'}>
+         Оставить заявку на помощь
+        </Link>
+       </Button>
       </div>
      </div>
      <div className={st.imageContainer}>
