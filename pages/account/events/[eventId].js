@@ -97,7 +97,7 @@ export default function EventPage() {
      </header>
      <section className={styles.projectTop}>
       <Image
-       src={project.imgSrc || project.materials[0]}
+       src={project.imgSrc || '/images/default.jpg'}
        width={400}
        height={480}
        style={{ objectFit: 'cover' }}
