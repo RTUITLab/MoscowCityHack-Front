@@ -76,7 +76,6 @@ export default function Requests() {
   {
    title: 'Действие',
    render: (text, id) => {
-    console.log(id);
     return (
      <div>
       <Button type={'primary'} style={{ marginRight: '10px' }}>

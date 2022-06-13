@@ -56,10 +56,10 @@ const Index = () => {
  const mockup_data = [
   {
    key: '0',
-   type: 'Какое-то мероприятие',
+   type: 'Помощь в приюте для собак',
    time: 4,
-   timeStamp: new Date().getTime(),
-   timeEnd: new Date().getTime(),
+   timeStart: new Date(654723834999).toLocaleDateString('ru'),
+   timeEnd: new Date().toLocaleDateString('ru'),
   },
  ];
 

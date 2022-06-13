@@ -40,12 +40,10 @@ export default function Events() {
 
  useEffect(() => {
   if (router.query.search) {
-   //setState({ name: router.query.search });
-   setSearch({ name: router.query.search });
+   setState({ name: router.query.search });
    document.getElementById('name-input').focus();
   }
   getEvents();
-  console.log(events);
  }, []);
 
  function ObjectToString(obj) {
@@ -150,11 +148,10 @@ export default function Events() {
    dataIndex: ['owner', 'id'],
    key: 'owner',
    render: async (id) => {
-    let q = await createQuery(`getCompanyByUserId(userId: ${id}) {
+    /*let q = '';await createQuery(`query{getCompanyByUserId(userId: ${id}) {
       id
-    }`);
-    console.log(q);
-    return 1;
+    }}`);*/
+    return 'Павел Семенов';
    },
   },
   {
@@ -182,7 +179,7 @@ export default function Events() {
    },
   },
   {
-   title: 'Направление',
+   title: 'Направления',
    dataIndex: 'directions',
    key: 'address',
    render: (directions) => (

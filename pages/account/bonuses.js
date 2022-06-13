@@ -68,7 +68,13 @@ export default function Bonuses() {
        alignItems: 'center',
        gap: '10px',
       }}>
-      <span style={{ color: 'green' }}>+ {points}</span>
+      <span
+       style={{
+        textAlign: 'center',
+        color: 'green',
+       }}>
+       + {points}
+      </span>
       <Badge />
      </div>
     );
