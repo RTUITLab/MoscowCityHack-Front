@@ -318,7 +318,7 @@ export default function CreateEventsAll() {
 
       createQuery(createRequestData).then(() => {
        message.info('Заявка успешно создана');
-       setTags(() => {
+       setTimeout(() => {
         router.push('/');
        }, 1500);
       });
