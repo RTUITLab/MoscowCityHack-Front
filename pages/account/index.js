@@ -219,25 +219,23 @@ export async function initUserData(setU, setState) {
     `);
  DATA = DATA?.data?.getAdvancementByToken;
 
- const EVENTS = (
-  await createQuery(`
+ let EVENTS = await createQuery(`
   {
   getEventsByToken {
    ${EVENTS_PARAMS}
   }
 }
-  `)
- ).data.getEventsByToken;
+  `);
+ EVENTS = EVENTS?.data?.getEventsByToken;
 
- const ALL_EVENTS = (
-  await createQuery(`
+ let ALL_EVENTS = await createQuery(`
   {
   getEventsByToken {
     ${EVENTS_PARAMS}
   }
 }
-  `)
- ).data.getEventsByToken;
+  `);
+ ALL_EVENTS = ALL_EVENTS?.data?.getEventsByToken;
 
  setState({ events: ALL_EVENTS });
 
