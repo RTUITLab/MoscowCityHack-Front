@@ -300,6 +300,7 @@ export async function initUserData(setU, setState) {
    points: DATA?.points || 0,
    level: DATA?.level || 0,
    events: EVENTS,
+   role: 'ROLE_MODERATOR',
   });
  }
 }

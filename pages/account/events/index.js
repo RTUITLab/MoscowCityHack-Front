@@ -4,7 +4,6 @@ import {
  DatePicker,
  Divider,
  Input,
- message,
  Select,
  Space,
  Table,
@@ -19,6 +18,7 @@ import { district, tags } from '../../../utils/data';
 import Link from 'next/link';
 import Map from '../../../components/map';
 import { createQuery } from '../../../services';
+import { useUser } from '../../../contexts/MainContext';
 
 const { Option } = Select;
 
@@ -26,6 +26,7 @@ export default function Events() {
  const router = useRouter();
  const [viewMap, setMapVisible] = useState(false);
  const [state, editState] = useState({});
+ const [user, setUser] = useUser();
  const [events, setEvents] = useState([]);
  const setState = (e) => {
   editState((prevState) => ({ ...prevState, ...e }));
@@ -153,18 +154,22 @@ export default function Events() {
       <Button type={'primary'}>Поиск</Button>
      </div>
      <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-      <Button
-       onClick={() => {
-        router.push('/account/events/create');
-       }}>
-       Создать мероприятие
-      </Button>
-      <Button
-       onClick={() => {
-        router.push('/account/events/requests');
-       }}>
-       Просмотр заявок
-      </Button>
+      {user.role === 'ROLE_MODERATOR' ? (
+       <>
+        <Button
+         onClick={() => {
+          router.push('/account/events/create');
+         }}>
+         Создать мероприятие
+        </Button>
+        <Button
+         onClick={() => {
+          router.push('/account/events/requests');
+         }}>
+         Просмотр заявок
+        </Button>
+       </>
+      ) : null}
       <Divider style={{ height: '100%' }} type="vertical" />
       <Button
        type="link"
