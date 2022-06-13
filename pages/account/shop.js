@@ -1,12 +1,12 @@
 import styles from '../../styles/shop.module.scss';
 import { Card, Image } from 'antd';
 import {
- HeartOutlined,
  HeartFilled,
- ShoppingOutlined,
+ HeartOutlined,
  ShoppingFilled,
+ ShoppingOutlined,
 } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAuth } from '../../contexts/MainContext';
 import Badge from '../../components/Badge/Badge';
 
@@ -60,8 +60,9 @@ function ShopCard(props) {
       alt="example"
       src={imgSrc}
       width="50"
-      height="50"
+      height="250px"
       objectFit="cover"
+      style={{ objectFit: 'cover' }}
      />
     }
     actions={[heart, shoppingCart]}>
@@ -78,7 +79,7 @@ function ShopCard(props) {
 
 export default function Shop() {
  /*const [favourite, setFavourite] = useState([]);
- const [shoppingCart, setShoppingCart] = useState([]);*/
+			const [shoppingCart, setShoppingCart] = useState([]);*/
  const [state, setState] = useAuth();
 
  function handleLike(id) {

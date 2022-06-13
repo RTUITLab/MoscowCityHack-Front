@@ -2,8 +2,8 @@ import Header from '../Header/Header';
 import { Button, Divider, Menu, Modal, PageHeader, Popover } from 'antd';
 import styles from './Layout.module.scss';
 import {
- HeartFilled,
  DeleteOutlined,
+ HeartFilled,
  MailOutlined,
  ReadOutlined,
  ShoppingCartOutlined,
@@ -172,6 +172,7 @@ function CartRow(props) {
  const [state, setState] = useAuth();
  let data = props.data;
  let inElem = props.inElem;
+
  function deleteFromCart() {
   let id = data.id;
   let curItems = state.shop.items;
@@ -184,6 +185,7 @@ function CartRow(props) {
    },
   });
  }
+
  return (
   <div
    style={{
@@ -195,7 +197,7 @@ function CartRow(props) {
     style={{ objectFit: 'cover' }}
     height={50}
     width={50}
-    src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+    src={data.imgSrc}
     alt=""
    />
    <div
